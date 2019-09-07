@@ -1,8 +1,8 @@
 # Nice Violin Plot Function
-niceViolin <- function (Group,Response,ManualColour=F,ylabel,xlabel=T,compare=F,comp1=NULL,comp2=NULL,compareManual=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
+niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle="ylabel",xtitle="xtitle",compare=F,comp1=NULL,comp2=NULL,compareManual=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
   Data <- data.frame(Group, Response)
   class(Data$Response) <- "numeric"
-  library(rcompanion)
+  if(!require(rcompanion)){install.packages("rcompanion") + library(rcompanion)}
   dataSummary <- groupwiseMean(Response ~ Group, 
                                data   = Data, 
                                conf   = 0.95, 
@@ -14,19 +14,16 @@ niceViolin <- function (Group,Response,ManualColour=F,ylabel,xlabel=T,compare=F,
                                basic       = FALSE,
                                percentile  = FALSE,
                                bca         = TRUE)
-  library(ggplot2)
-  library(ggsignif)
+  if(!require(ggplot2)){install.packages("ggplot2") + library(ggplot2)}
+  if(!require(ggsignif)){install.packages("ggsignif") + library(ggsignif)}
   ggplot(Data, aes(x = factor(Group), 
                    y = Response,
                    fill = factor(Group))) + 
     theme_grey(base_size = 24) +
-    {if (ManualColour == TRUE) scale_fill_manual(values=c("#00BA38",
-                                                          "#619CFF",
-                                                          "#F8766D"))} +
-    scale_x_discrete(labels=c("EPT" = "Embodied",
-                              "MPT" = "Mental",
-                              "CTR" = "Control")) +
-    ylab(ylabel) +
+    {if (Manual.Colour == TRUE) scale_fill_manual(values=what.Colours)} +
+    scale_x_discrete(labels=c(xlabels)) +
+    ylab(ytitle) +
+    xlab(xtitle) +
     geom_violin() +
     geom_point(aes(y = dataSummary$Mean), 
                color = "black", 
@@ -40,10 +37,13 @@ niceViolin <- function (Group,Response,ManualColour=F,ylabel,xlabel=T,compare=F,
                   width = 0.2, 
                   data = dataSummary) + 
     theme(legend.position = "none", 
-          axis.title.x=element_blank(),
           axis.text.x = element_text(colour="black"), 
-          axis.text.y = element_text(colour="black")) +
-    {if (xlabel == FALSE) theme(axis.text.x=element_blank(),
+          axis.text.y = element_text(colour="black"),
+          axis.title.x= {if (has.xtitle == FALSE) element_blank()},
+          axis.title.y = switch((has.ytitle == FALSE) + 1, element_text(angle = 90), element_blank())) +
+    {if (has.ylabels == FALSE) theme(axis.text.y=element_blank(),
+                                    axis.ticks.y=element_blank())} +
+    {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
                                axis.ticks.x=element_blank())} +
     {if (compare == TRUE) geom_signif(comparisons = list(c(comp1, comp2)), 
                                           map_signif_level=TRUE, 
