@@ -1,5 +1,5 @@
 # Nice Violin Plot Function
-niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,Manual.xLabels=F,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle="ylabel",xtitle="xtitle",compare=F,comp1=NULL,comp2=NULL,compareManual=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
+niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,Manual.xlabels=F,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle="ylabel",xtitle="xtitle",compare=F,comp1=NULL,comp2=NULL,compareManual=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
   Data <- data.frame(Group, Response)
   class(Data$Response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion") + library(rcompanion)}
@@ -21,7 +21,7 @@ niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=
                    fill = factor(Group))) + 
     theme_grey(base_size = 24) +
     {if (Manual.Colour == TRUE) scale_fill_manual(values=what.Colours)} +
-    {if (Manual.xLabels == TRUE) scale_x_discrete(labels=c(xlabels))} +
+    {if (Manual.xlabels == TRUE) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
     xlab(xtitle) +
     geom_violin() +
