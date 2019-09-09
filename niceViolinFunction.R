@@ -1,5 +1,5 @@
 # Nice Violin Plot Function
-niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,Manual.xlabels=F,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle="ylabel",xtitle="xtitle",compare=F,comp1=NULL,comp2=NULL,compareManual=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
+niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,Manual.xlabels=F,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle="ylabel",xtitle="xtitle",compare=F,comp1=NULL,comp2=NULL,Manual.compare=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
   Data <- data.frame(Group, Response)
   class(Data$Response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion") + library(rcompanion)}
@@ -49,7 +49,7 @@ niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=
                                           map_signif_level=TRUE, 
                                           size= 1.3, 
                                           textsize=8)} +
-    {if (compareManual == TRUE) geom_signif(annotation=signif_annotation, 
+    {if (Manual.compare == TRUE) geom_signif(annotation=signif_annotation, 
                                             y_position=signif_yposition, 
                                             xmin=signif_xmin, 
                                             xmax=signif_xmax,
