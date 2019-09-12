@@ -19,7 +19,7 @@ niceScatter <- function (Data,Predictor,Response,xtitle=waiver(),ytitle=waiver()
     jitter <- geom_jitter(size = 2, alpha = alpha)}
   if (has.jitter == T & has.Groups == T) {
     jitter <- geom_jitter(size = 2, alpha = alpha)}
-  ggplot(Data,aes(x=Predictor,y=Response, colour = switch(has.Groups==T, Group.variable), fill = switch(has.Groups==T, Group.variable), linetype = switch(has.Groups==T & has.linetype==T, Group.variable), shape = switch(has.Groups==T & has.shape==T, Group.variable))) +
+  ggplot(Data,aes(x={{Predictor}},y={{Response}}, colour = switch(has.Groups==T, Group.variable), fill = switch(has.Groups==T, Group.variable), linetype = switch(has.Groups==T & has.linetype==T, Group.variable), shape = switch(has.Groups==T & has.shape==T, Group.variable))) +
     xlab(xtitle) +
     ylab(ytitle) +
     smooth +
@@ -35,4 +35,3 @@ niceScatter <- function (Data,Predictor,Response,xtitle=waiver(),ytitle=waiver()
     labs(legend.title = legend.Title, colour = legend.Title, fill = legend.Title, linetype = legend.Title, shape = legend.Title) +
     theme(axis.text.x = element_text(colour="black"), axis.text.y = element_text(colour="black"), panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.border=element_blank(), axis.line=element_line())
 }
-
