@@ -1,5 +1,5 @@
 # Nice Violin Plot Function
-niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,Manual.xlabels=F,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle="ylabel",xtitle="xtitle",compare=F,comp1=NULL,comp2=NULL,Manual.compare=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
+niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,Manual.xlabels=F,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle=waiver(),xtitle=waiver(),compare=F,comp1=NULL,comp2=NULL,Manual.compare=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
   Data <- data.frame(Group, Response)
   class(Data$Response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion") + library(rcompanion)}
@@ -19,7 +19,7 @@ niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=
   ggplot(Data, aes(x = factor(Group), 
                    y = Response,
                    fill = factor(Group))) + 
-    theme_grey(base_size = 24) +
+    theme_bw(base_size = 24) +
     {if (Manual.Colour == TRUE) scale_fill_manual(values=what.Colours)} +
     {if (Manual.xlabels == TRUE) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
@@ -40,7 +40,13 @@ niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=
           axis.text.x = element_text(colour="black"), 
           axis.text.y = element_text(colour="black"),
           axis.title.x= {if (has.xtitle == FALSE) element_blank()},
-          axis.title.y = switch((has.ytitle == FALSE) + 1, element_text(angle = 90), element_blank())) +
+          axis.title.y = switch((has.ytitle == FALSE) + 1,
+                                element_text(angle = 90), 
+                                element_blank()),
+          panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),
+          panel.border=element_blank(),
+          axis.line=element_line()) +
     {if (has.ylabels == FALSE) theme(axis.text.y=element_blank(),
                                     axis.ticks.y=element_blank())} +
     {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
