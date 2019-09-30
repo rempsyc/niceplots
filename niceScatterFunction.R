@@ -4,7 +4,7 @@ niceScatter <- function (Data,Predictor,Response,xtitle=waiver(),ytitle=waiver()
   if (!missing(Groups.order)) {Group.variable <- factor(Group.variable, levels=Groups.order)}
   if (!missing(Groups.names)) {levels(Group.variable) = Groups.names}
   if (has.Groups == F) {
-    smooth <- geom_smooth(method="lm", se = has.ConfBand, fullrange=has.Fullrange, color = what.Colour)}
+    smooth <- geom_smooth(method="lm", se = has.ConfBand, fullrange=has.Fullrange, color = what.Colour, fill = what.Colour)}
   if (has.Groups == T) {
     smooth <- geom_smooth(method="lm", se = has.ConfBand, fullrange=has.Fullrange)}
   if (has.points == T & has.Groups == F & Manual.colour == T) {
