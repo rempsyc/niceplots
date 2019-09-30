@@ -33,5 +33,5 @@ niceScatter <- function (Data,Predictor,Response,xtitle=waiver(),ytitle=waiver()
     {if (Manual.colour == TRUE) guides(fill = guide_legend(override.aes=list(colour = what.Colour)))} +
     {if (has.Legend == FALSE) theme(legend.position = "none")} +
     labs(legend.title = legend.Title, colour = legend.Title, fill = legend.Title, linetype = legend.Title, shape = legend.Title) +
-    theme(axis.text.x = element_text(colour="black"), axis.text.y = element_text(colour="black"), panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.border=element_blank(), axis.line=element_line())
+    theme(axis.text.x = element_text(colour="black"), axis.text.y = element_text(colour="black"), panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.border=element_blank(), axis.line=element_line(colour = "black"), axis.ticks=element_line(colour = "black"))
 }
