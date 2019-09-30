@@ -46,7 +46,8 @@ niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=
           panel.grid.major=element_blank(),
           panel.grid.minor=element_blank(),
           panel.border=element_blank(),
-          axis.line=element_line()) +
+          axis.line=element_line(colour = "black"),
+          axis.ticks=element_line(colour = "black")) +
     {if (has.ylabels == FALSE) theme(axis.text.y=element_blank(),
                                     axis.ticks.y=element_blank())} +
     {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
