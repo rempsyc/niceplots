@@ -1,4 +1,4 @@
-niceScatter <- function (Data,Predictor,Response,xtitle=waiver(),ytitle=waiver(),has.points=T,has.jitter=F,alpha=0.7,has.ConfBand=F,has.Fullrange=F,has.linetype=F,has.shape=F,x_scale_Manual=F,y_scale_Manual=F,xmin,xmax,ymin,ymax,has.Legend=F,legend.Title="",has.Groups=F,Group.variable=NULL,Manual.colour=F,what.Colour="#619CFF",Groups.order=NULL,Groups.names=NULL,manual.slope.alpha=NULL) {
+function (Data,Predictor,Response,xtitle=waiver(),ytitle=waiver(),has.points=T,has.jitter=F,alpha=0.7,has.ConfBand=F,has.Fullrange=F,has.linetype=F,has.shape=F,x_scale_Manual=F,y_scale_Manual=F,xmin,xmax,ymin,ymax,has.Legend=F,legend.Title="",has.Groups=F,Group.variable=NULL,Manual.colour=F,what.Colour="#619CFF",Groups.order=NULL,Groups.names=NULL,manual.slope.alpha=NULL) {
   library(ggplot2)
   if (!missing(Groups.order)) {Group.variable <- factor(Group.variable, levels=Groups.order)}
   if (!missing(Groups.names)) {levels(Group.variable) = Groups.names}
