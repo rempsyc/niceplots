@@ -14,7 +14,7 @@ niceScatter <- function (Data,Predictor,Response,xtitle=waiver(),ytitle=waiver()
     point <- geom_point(size = 2, alpha = alpha, shape = 16)}
   if (has.points == T & has.Groups == F & Manual.colour == T) {
     point <- geom_point(size = 2, alpha = alpha, colour = what.Colour, shape = 16)}
-  if (has.points == T & has.Groups & has.shape == F) {
+  if (has.points == T & has.Groups == T & has.shape == F) {
     point <- geom_point(size = 2, alpha = alpha, shape = 16)}
   if (has.points == T & has.Groups == T & has.shape == T) {
     point <- geom_point(size = 2, alpha = alpha)}
