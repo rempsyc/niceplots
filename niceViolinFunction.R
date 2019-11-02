@@ -1,5 +1,4 @@
-# Nice Violin Plot Function
-niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,Manual.xlabels=F,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle=waiver(),xtitle=waiver(),compare=F,comp1=NULL,comp2=NULL,Manual.compare=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
+niceViolin <- function (Group,Response,boot=T,bootstraps=2000,Manual.Colour=F,what.Colours,has.ylabels=T,has.xlabels=T,Manual.xlabels=F,xlabels=NULL,has.xtitle=T,has.ytitle=T,ytitle=waiver(),xtitle=waiver(),compare=F,comp1=NULL,comp2=NULL,Manual.compare=F,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
   Data <- data.frame(Group, Response)
   class(Data$Response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion") + library(rcompanion)}
@@ -7,13 +6,13 @@ niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=
                                data   = Data, 
                                conf   = 0.95, 
                                digits = 3,
-                               R      = 2000,
+                               R      = bootstraps,
                                boot        = TRUE,
-                               traditional = FALSE,
+                               traditional = !boot,
                                normal      = FALSE,
                                basic       = FALSE,
                                percentile  = FALSE,
-                               bca         = TRUE)
+                               bca         = boot)
   if(!require(ggplot2)){install.packages("ggplot2") + library(ggplot2)}
   if(!require(ggsignif)){install.packages("ggsignif") + library(ggsignif)}
   ggplot(Data, aes(x = factor(Group), 
@@ -30,8 +29,8 @@ niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=
                size = 4, 
                data = dataSummary) + 
     geom_errorbar(aes(y = dataSummary$Mean, 
-                      ymin = dataSummary$Bca.lower, 
-                      ymax = dataSummary$Bca.upper),
+                      ymin = dataSummary[,6], 
+                      ymax = dataSummary[,7]),
                   color = "black", 
                   size = 0.5, 
                   width = 0.2, 
@@ -49,18 +48,17 @@ niceViolin <- function (Group,Response,Manual.Colour=F,what.Colours,has.ylabels=
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black")) +
     {if (has.ylabels == FALSE) theme(axis.text.y=element_blank(),
-                                    axis.ticks.y=element_blank())} +
+                                     axis.ticks.y=element_blank())} +
     {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
-                               axis.ticks.x=element_blank())} +
+                                     axis.ticks.x=element_blank())} +
     {if (compare == TRUE) geom_signif(comparisons = list(c(comp1, comp2)), 
-                                          map_signif_level=TRUE, 
-                                          size= 1.3, 
-                                          textsize=8)} +
+                                      map_signif_level=TRUE, 
+                                      size= 1.3, 
+                                      textsize=8)} +
     {if (Manual.compare == TRUE) geom_signif(annotation=signif_annotation, 
-                                            y_position=signif_yposition, 
-                                            xmin=signif_xmin, 
-                                            xmax=signif_xmax,
-                                            size=1.3, 
-                                            textsize=8)}
+                                             y_position=signif_yposition, 
+                                             xmin=signif_xmin, 
+                                             xmax=signif_xmax,
+                                             size=1.3, 
+                                             textsize=8)}
 }
-# Dots  = Means; Error bars = 95% bootstrapped confidence Intervals; Width = Distribution Density (Frequency)
