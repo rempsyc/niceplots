@@ -1,4 +1,4 @@
-overlapCircle <- function(response,categories=c("Self", "Other")){
+overlapCircle <- function(response,categories = c("Self", "Other")){
   library(VennDiagram)
   grid.newpage()
   scale = (c(1,2,3,4,5,6,7))
@@ -17,6 +17,5 @@ overlapCircle <- function(response,categories=c("Self", "Other")){
                                   ext.dist = -5,
                                   sep.dist = 0.02,
                                   label.col = c("white","black","white"))
-  cat("To save to file, enter the following commands (replace PDF with PNG if desired):\npdf(file = 'filepath/filename.pdf')\noverlap.circle(% overlap)\ndev.off()")
+  cat("To save to file, enter the following commands (replace PDF with PNG if desired):\nDon't forget to replace 'desired score' with the actual score you want to plot\npdf(file = 'filepath/filename.pdf')\noverlapCircle(desired score)\ndev.off()")
 }
-
