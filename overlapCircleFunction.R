@@ -16,5 +16,6 @@ overlapCircle <- function(response,categories = c("Self", "Other")){
                                   ext.pos = 0,
                                   ext.dist = -5,
                                   sep.dist = 0.02,
-                                  label.col = c("white","black","white"))  
+                                  label.col = c("white","black","white"))
+  cat("To save to file, enter the following commands (replace PDF with PNG if desired):\nDon't forget to replace 'desired score' with the actual score you want to plot\npdf(file = 'filepath/filename.pdf')\noverlapCircle(desired score)\ndev.off()")
 }
