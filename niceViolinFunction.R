@@ -19,7 +19,7 @@ niceViolin <- function (Group,Response,boot=T,bootstraps=2000,what.colours,xlabe
                    y = Response,
                    fill = factor(Group))) + 
     theme_bw(base_size = 24) +
-    {if (!missing(what.colours)) scale_fill_manual(values=what.Colours)} +
+    {if (!missing(what.colours)) scale_fill_manual(values=what.colours)} +
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
     xlab(xtitle) +
@@ -38,10 +38,6 @@ niceViolin <- function (Group,Response,boot=T,bootstraps=2000,what.colours,xlabe
     theme(legend.position = "none", 
           axis.text.x = element_text(colour="black"), 
           axis.text.y = element_text(colour="black"),
-          # axis.title.x= {if (has.xtitle == FALSE) element_blank()},
-          # axis.title.y = switch((has.ytitle == FALSE) + 1,
-          #                      element_text(angle = 90), 
-          #                      element_blank()),
           panel.grid.major=element_blank(),
           panel.grid.minor=element_blank(),
           panel.border=element_blank(),
