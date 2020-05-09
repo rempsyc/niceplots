@@ -1,4 +1,4 @@
-niceViolin <- function (Group,Response,boot=T,bootstraps=2000,what.colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels = T,has.xlabels = T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
+niceViolin <- function (Group,Response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels = T,has.xlabels = T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
   Data <- data.frame(Group, Response)
   class(Data$Response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion") + library(rcompanion)}
@@ -19,7 +19,7 @@ niceViolin <- function (Group,Response,boot=T,bootstraps=2000,what.colours,xlabe
                    y = Response,
                    fill = factor(Group))) + 
     theme_bw(base_size = 24) +
-    {if (!missing(what.colours)) scale_fill_manual(values=what.colours)} +
+    {if (!missing(colours)) scale_fill_manual(values=colours)} +
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
     xlab(xtitle) +
