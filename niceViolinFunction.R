@@ -1,8 +1,8 @@
-niceViolin <- function (Group,Response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels = T,has.xlabels = T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
-  Data <- data.frame(Group, Response)
-  class(Data$Response) <- "numeric"
+niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels=T,has.xlabels=T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
+  Data <- data.frame(group, response)
+  class(Data$response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion") + library(rcompanion)}
-  dataSummary <- groupwiseMean(Response ~ Group, 
+  dataSummary <- groupwiseMean(response ~ group, 
                                data   = Data, 
                                conf   = 0.95, 
                                digits = 3,
@@ -15,9 +15,9 @@ niceViolin <- function (Group,Response,boot=T,bootstraps=2000,colours,xlabels=NU
                                bca         = boot)
   if(!require(ggplot2)){install.packages("ggplot2") + library(ggplot2)}
   if(!require(ggsignif)){install.packages("ggsignif") + library(ggsignif)}
-  ggplot(Data, aes(x = factor(Group), 
-                   y = Response,
-                   fill = factor(Group))) + 
+  ggplot(Data, aes(x = factor(group), 
+                   y = response,
+                   fill = factor(group))) + 
     theme_bw(base_size = 24) +
     {if (!missing(colours)) scale_fill_manual(values=colours)} +
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
