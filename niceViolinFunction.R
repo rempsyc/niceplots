@@ -2,6 +2,8 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
   Data <- data.frame(group, response)
   class(Data$response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion") + library(rcompanion)}
+  if(!require(ggplot2)){install.packages("ggplot2") + library(ggplot2)}
+  if(!require(ggsignif)){install.packages("ggsignif") + library(ggsignif)}
   dataSummary <- groupwiseMean(response ~ group, 
                                data   = Data, 
                                conf   = 0.95, 
@@ -13,8 +15,6 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
                                basic       = FALSE,
                                percentile  = FALSE,
                                bca         = boot)
-  if(!require(ggplot2)){install.packages("ggplot2") + library(ggplot2)}
-  if(!require(ggsignif)){install.packages("ggsignif") + library(ggsignif)}
   ggplot(Data, aes(x = factor(group), 
                    y = response,
                    fill = factor(group))) + 
