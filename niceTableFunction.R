@@ -1,4 +1,4 @@
-niceTable <- function (dataframe, special = FALSE) {
+niceTable <- function (dataframe, special = FALSE, highlight = FALSE) {
   if(!require(flextable)){install.packages("flextable") + library(flextable)}
   if(!require(dplyr)){install.packages("dplyr") + library(dplyr)}
   dataframe %>%
@@ -17,6 +17,14 @@ niceTable <- function (dataframe, special = FALSE) {
             value = as_paragraph("sr", as_sup("2"))) %>% 
     compose(i = 1, j = 5, part = "header",
             value = as_paragraph("η", as_sub("p"), as_sup("2"))) -> table
+    }
+  if(highlight == TRUE) {
+    table %>%
+    bold(i = ~ signif == TRUE,
+         j = ~ B + t + p + np2 + sr2 + signif) %>%
+    bg(i = ~ signif == TRUE,
+       j = ~ B + t + p + np2 + sr2 + signif,
+       bg = "#CFCAC2") -> table
     }
   table
 }
