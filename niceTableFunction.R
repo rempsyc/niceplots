@@ -16,6 +16,7 @@ niceTable <- function (dataframe, special = FALSE) {
     compose(i = 1, j = 6, part = "header",
             value = as_paragraph("sr", as_sup("2"))) %>% 
     compose(i = 1, j = 5, part = "header",
-            value = as_paragraph("η", as_sub("p"), as_sup("2")))
+            value = as_paragraph("η", as_sub("p"), as_sup("2"))) -> table
     }
+  table
 }
