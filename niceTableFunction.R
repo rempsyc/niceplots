@@ -1,4 +1,4 @@
-niceTable <- function (dataframe, italics = NULL, special = NULL, highlight = NULL) {
+niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = FALSE) {
   if(!require(flextable)){install.packages("flextable") + library(flextable)}
   if(!require(dplyr)){install.packages("dplyr") + library(dplyr)}
   dataframe %>%
