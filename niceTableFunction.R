@@ -21,9 +21,9 @@ niceTable <- function (dataframe, special = FALSE, highlight = FALSE) {
   if(highlight == TRUE) {
     table %>%
     bold(i = ~ signif == TRUE,
-         j = Model ~ B + t + p + np2 + sr2 + signif) %>%
+         j = ~ Model + B + t + p + np2 + sr2 + signif) %>%
     bg(i = ~ signif == TRUE,
-       j = ~ Model B + t + p + np2 + sr2 + signif,
+       j = ~ Model + B + t + p + np2 + sr2 + signif,
        bg = "#CFCAC2") -> table
     }
   table
