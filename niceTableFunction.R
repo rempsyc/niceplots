@@ -1,4 +1,4 @@
-niceTable <- function (dataframe, special = FALSE, highlight = FALSE) {
+niceTable <- function (dataframe, italics = NULL, special = NULL, highlight = NULL) {
   if(!require(flextable)){install.packages("flextable") + library(flextable)}
   if(!require(dplyr)){install.packages("dplyr") + library(dplyr)}
   dataframe %>%
@@ -8,6 +8,9 @@ niceTable <- function (dataframe, special = FALSE, highlight = FALSE) {
     font(part = "all", fontname = "Times New Roman") %>%
     align(align = "center", part = "all") %>%
     set_table_properties(layout = "autofit") -> table
+  if(!missing(italics)) {
+    table %>%
+    italic(j = italics, part = "header") -> table
   if(special == TRUE) {
     table %>%
     italic(j = 3:6, part = "header") %>%
