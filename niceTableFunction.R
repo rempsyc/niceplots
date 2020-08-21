@@ -11,6 +11,7 @@ niceTable <- function (dataframe, italics = NULL, special = NULL, highlight = NU
   if(!missing(italics)) {
     table %>%
     italic(j = italics, part = "header") -> table
+  }
   if(special == TRUE) {
     table %>%
     italic(j = 3:6, part = "header") %>%
