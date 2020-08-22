@@ -24,10 +24,40 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
     table %>%
     italic(j = "SE", part = "header") -> table
     }
+  if("SD" %in% names(dataframe)) {
+    table %>%
+    italic(j = "SD", part = "header") -> table
+    }
+  if("F" %in% names(dataframe)) {
+    table %>%
+    italic(j = "F", part = "header") -> table
+    }
+  if("df" %in% names(dataframe)) {
+    table %>%
+    italic(j = "df", part = "header") -> table
+    }
+  if("r" %in% names(dataframe)) {
+    table %>%
+    italic(j = "r", part = "header") -> table
+    }
+   if("b" %in% names(dataframe)) {
+    table %>%
+    italic(j = "b", part = "header") -> table
+    }
+  if("M" %in% names(dataframe)) {
+    table %>%
+    italic(j = "M", part = "header") -> table
+    }
   if("B" %in% names(dataframe)) {
     table %>%
     compose(i = 1, j = "B", part = "header",
             value = as_paragraph("β")) -> table
+    }
+  if("R2" %in% names(dataframe)) {
+    table %>%
+    compose(i = 1, j = "R2", part = "header",
+            value = as_paragraph("R", as_sup("2"))) %>%
+    italic(j = "R2", part = "header") -> table
     }
   if("sr2" %in% names(dataframe)) {
     table %>%
