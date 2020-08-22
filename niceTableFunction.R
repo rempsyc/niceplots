@@ -17,14 +17,14 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
     compose(i = 1, j = "B", part = "header",
             value = as_paragraph("β")) -> table
     }
-  if(special == TRUE) {
+  if("sr2" %in% names(dataframe)) {
     table %>%
-    italic(j = 3:6, part = "header") %>%
-    compose(i = 1, j = 2, part = "header",
-            value = as_paragraph("β")) %>%
-    compose(i = 1, j = 6, part = "header",
-            value = as_paragraph("sr", as_sup("2"))) %>% 
-    compose(i = 1, j = 5, part = "header",
+    compose(i = 1, j = "sr2", part = "header",
+            value = as_paragraph("sr", as_sup("2"))) -> table
+    }
+  if("np2" %in% names(dataframe)) {
+    table %>%
+    compose(i = 1, j = "np2", part = "header",
             value = as_paragraph("η", as_sub("p"), as_sup("2"))) -> table
     }
   if(highlight == TRUE) {
