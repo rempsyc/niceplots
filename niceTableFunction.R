@@ -20,6 +20,10 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
     table %>%
     italic(j = "t", part = "header") -> table
     }
+  if("SE" %in% names(dataframe)) {
+    table %>%
+    italic(j = "SE", part = "header") -> table
+    }
   if("B" %in% names(dataframe)) {
     table %>%
     compose(i = 1, j = "B", part = "header",
