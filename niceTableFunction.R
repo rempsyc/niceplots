@@ -24,6 +24,16 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
       set_formatter(p = function(x)
         format.p(x)) -> table
   }  
+  if("r" %in% names(dataframe)) {
+    format.r <- function(p, precision = 0.01) {
+      digits <- -log(precision, base = 10)
+      p <- formatC(p, format = 'f', digits = digits)
+      sub("0", "", p)}
+    table %>%
+      italic(j = "r", part = "header") %>%
+      set_formatter(r = function(x)
+        format.r(x)) -> table
+  }
   if("t" %in% names(dataframe)) {
     table %>%
       italic(j = "t", part = "header") -> table
@@ -44,10 +54,6 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
     table %>%
       italic(j = "df", part = "header") -> table
   }
-  if("r" %in% names(dataframe)) {
-    table %>%
-      italic(j = "r", part = "header") -> table
-  }
   if("b" %in% names(dataframe)) {
     table %>%
       italic(j = "b", part = "header") -> table
@@ -65,13 +71,17 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
     table %>%
       compose(i = 1, j = "R2", part = "header",
               value = as_paragraph("R", as_sup("2"))) %>%
-      italic(j = "R2", part = "header") -> table
+      italic(j = "R2", part = "header") %>%
+      set_formatter(R2 = function(x)
+        format.r(x)) -> table
   }
   if("sr2" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "sr2", part = "header",
               value = as_paragraph("sr", as_sup("2"))) %>%
-      italic(j = "sr2", part = "header") -> table
+      italic(j = "sr2", part = "header") %>%
+      set_formatter(sr2 = function(x)
+        format.r(x)) -> table
   }
   if("np2" %in% names(dataframe)) {
     table %>%
