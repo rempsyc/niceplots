@@ -12,23 +12,23 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
     table %>%
       italic(j = italics, part = "header") -> table
   }
+  format.p <- function(p, precision = 0.001) {
+    digits <- -log(precision, base = 10)
+    p <- formatC(p, format = 'f', digits = digits)
+    p[p == formatC(0, format = 'f', digits = digits)] <- paste0('< ', precision)
+    sub("0", "", p)
+  }
+  format.r <- function(p, precision = 0.01) {
+    digits <- -log(precision, base = 10)
+    p <- formatC(p, format = 'f', digits = digits)
+    sub("0", "", p)}
   if("p" %in% names(dataframe)) {
-    format.p <- function(p, precision = 0.001) {
-      digits <- -log(precision, base = 10)
-      p <- formatC(p, format = 'f', digits = digits)
-      p[p == formatC(0, format = 'f', digits = digits)] <- paste0('< ', precision)
-      sub("0", "", p)
-    }
     table %>%
       italic(j = "p", part = "header") %>%
       set_formatter(p = function(x)
         format.p(x)) -> table
   }  
   if("r" %in% names(dataframe)) {
-    format.r <- function(p, precision = 0.01) {
-      digits <- -log(precision, base = 10)
-      p <- formatC(p, format = 'f', digits = digits)
-      sub("0", "", p)}
     table %>%
       italic(j = "r", part = "header") %>%
       set_formatter(r = function(x)
