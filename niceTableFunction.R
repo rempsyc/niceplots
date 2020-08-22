@@ -14,7 +14,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   }
   if("B" %in% names(dataframe)) {
     table %>%
-    compose(i = 1, j = B, part = "header",
+    compose(i = 1, j = "B", part = "header",
             value = as_paragraph("β")) -> table
     }
   if(special == TRUE) {
