@@ -10,3 +10,5 @@ https://remitheriault.cf/blog_scatter.html
 https://remitheriault.cf/blog_randomize.html
 
 https://remitheriault.cf/blog_circles.html
+
+https://remitheriault.cf/blog_table.html
