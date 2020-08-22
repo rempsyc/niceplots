@@ -12,6 +12,14 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
     table %>%
     italic(j = italics, part = "header") -> table
   }
+  if("p" %in% names(dataframe)) {
+    table %>%
+    italic(j = "p", part = "header") -> table
+    }  
+  if("t" %in% names(dataframe)) {
+    table %>%
+    italic(j = "t", part = "header") -> table
+    }
   if("B" %in% names(dataframe)) {
     table %>%
     compose(i = 1, j = "B", part = "header",
@@ -20,7 +28,8 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if("sr2" %in% names(dataframe)) {
     table %>%
     compose(i = 1, j = "sr2", part = "header",
-            value = as_paragraph("sr", as_sup("2"))) -> table
+            value = as_paragraph("sr", as_sup("2"))) %>%
+    italic(j = "sr2", part = "header") -> table
     }
   if("np2" %in% names(dataframe)) {
     table %>%
