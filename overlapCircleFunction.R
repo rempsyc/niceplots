@@ -1,5 +1,5 @@
 overlapCircle <- function(response,categories = c("Self", "Other")){
-  library(VennDiagram)
+  if(!require(VennDiagram)){install.packages("VennDiagram") + library(VennDiagram)}
   grid.newpage()
   scale = (c(1,2,3,4,5,6,7))
   overlap = (c(0,10,20,30,55,65,85))
