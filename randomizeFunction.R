@@ -1,6 +1,7 @@
 randomize <- function (design="between",Ncondition=3,n=9,condition.names=c("a","b","c"),col.names=c("id", "Condition")) {
   Condition <- data.frame() # to precreate dataframe  
-  if(!require(plyr)){install.packages("plyr") + library(plyr)}
+  if(!require(plyr)){install.packages("plyr")}
+  library(plyr)
   if (design=="between") {
     if (!n%%Ncondition==0) {cat("Warning(!): sample size needs to be a multiple of your number of groups if using 'between'!")}
     for (i in 1:(n/Ncondition)){ # Repeat this for number of participants divided by Ncondition (number of complete combinations)
