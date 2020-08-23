@@ -1,6 +1,8 @@
 niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = FALSE) {
-  if(!require(flextable)){install.packages("flextable") + library(flextable)}
-  if(!require(dplyr)){install.packages("dplyr") + library(dplyr)}
+  if(!require(flextable)){install.packages("flextable")}
+   if(!require(dplyr)){install.packages("dplyr")}
+  library(flextable)
+  library(dplyr)
   dataframe %>%
     flextable %>%
     theme_vanilla %>%
