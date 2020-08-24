@@ -3,9 +3,14 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if(!require(dplyr)){install.packages("dplyr")}
   library(flextable)
   library(dplyr)
+  nice.borders <- list("width" = 1, color = "black", style = "solid")
   dataframe %>%
     flextable %>%
     theme_booktabs %>%
+    hline_top(part="head", border = nice.borders) %>%
+    hline_bottom(part="head", border = nice.borders) %>%
+    hline_top(part="body", border = nice.borders) %>%
+    hline_bottom(part="body", border = nice.borders) %>%
     fontsize(part = "all", size = 12) %>%
     font(part = "all", fontname = "Times New Roman") %>%
     align(align = "center", part = "all") %>%
