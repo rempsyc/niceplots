@@ -3,7 +3,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if(!require(dplyr)){install.packages("dplyr")}
   library(flextable)
   library(dplyr)
-  nice.borders <- list("width" = 1, color = "black", style = "solid")
+  nice.borders <- list("width" = 0.5, color = "black", style = "solid")
   dataframe %>%
     flextable %>%
     theme_booktabs %>%
