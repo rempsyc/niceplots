@@ -1,11 +1,11 @@
 niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = FALSE) {
   if(!require(flextable)){install.packages("flextable")}
-   if(!require(dplyr)){install.packages("dplyr")}
+  if(!require(dplyr)){install.packages("dplyr")}
   library(flextable)
   library(dplyr)
   dataframe %>%
     flextable %>%
-    theme_vanilla %>%
+    theme_booktabs %>%
     fontsize(part = "all", size = 12) %>%
     font(part = "all", fontname = "Times New Roman") %>%
     align(align = "center", part = "all") %>%
