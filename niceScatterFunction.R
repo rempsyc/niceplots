@@ -1,4 +1,4 @@
-niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),has.points=T,has.jitter=F,alpha=0.7,has.confband=F,has.fullrange=F,has.linetype=F,has.shape=F,xmin,xmax,xby=1,ymin,ymax,yby=1,has.legend=F,legend.title="",group.variable=NULL,colours="#619CFF",groups.order=NULL,groups.names=NULL,manual.slope.alpha=NULL,add.r=NULL, r.x = Inf, r.y = -Inf) {
+niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),has.points=T,has.jitter=F,alpha=0.7,has.confband=F,has.fullrange=F,has.linetype=F,has.shape=F,xmin,xmax,xby=1,ymin,ymax,yby=1,has.legend=F,legend.title="",group.variable=NULL,colours="#619CFF",groups.order=NULL,groups.names=NULL,manual.slope.alpha=NULL,add.r=FALSE, r.x = Inf, r.y = -Inf) {
   if(!require(ggplot2)){install.packages("ggplot2")}
   library(ggplot2)
   has.groups=!missing(group.variable)
@@ -48,6 +48,6 @@ niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),
     {if (has.legend == FALSE) theme(legend.position = "none")} +
     labs(legend.title = legend.title, colour = legend.title, fill = legend.title, linetype = legend.title, shape = legend.title) +
     {if (!missing(manual.slope.alpha)) scale_alpha_manual(values=manual.slope.alpha, guide=FALSE)} +
-    {if (!missing(add.r)) annotate(geom="text", x=r.x, y=r.y, label=paste0("r = ", r), hjust=1, vjust=-1, size=7)} +
+    {if (add.r == TRUE) annotate(geom="text", x=r.x, y=r.y, label=paste0("r = ", r), hjust=1, vjust=-1, size=7)} +
     theme(axis.text.x = element_text(colour="black"), axis.text.y = element_text(colour="black"), panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.border=element_blank(), axis.line=element_line(colour = "black"), axis.ticks=element_line(colour = "black"))
 }
