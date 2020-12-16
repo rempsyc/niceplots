@@ -73,7 +73,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if("B" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "B", part = "header",
-              value = as_paragraph("β")) -> table
+              value = as_paragraph("�")) -> table
   }
   if("R2" %in% names(dataframe)) {
     table %>%
@@ -94,7 +94,15 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if("np2" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "np2", part = "header",
-              value = as_paragraph("η", as_sub("p"), as_sup("2"))) -> table
+              value = as_paragraph("<U+03B7>", as_sub("p"), as_sup("2"))) -> table
+  }
+  if("dR" %in% names(dataframe)) {
+    table %>%
+      compose(i = 1, j = "dR", part = "header",
+              value = as_paragraph("d", as_sub("R"))) %>%
+      italic(j = "d", part = "header") %>%
+      set_formatter(dR = function(x)
+        format.r(x)) -> table
   }
   if(highlight == TRUE) {
     table %>%
