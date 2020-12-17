@@ -40,8 +40,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
     table %>%
       italic(j = "r", part = "header") %>%
       set_formatter(r = function(x)
-        format.r(x)) %>%
-      colformat_num(j = "r", big.mark=",", digits = 3) -> table
+        format.r(x)) -> table
   }
   if("t" %in% names(dataframe)) {
     table %>%
@@ -89,8 +88,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
               value = as_paragraph("R", as_sup("2"))) %>%
       italic(j = "R2", part = "header") %>%
       set_formatter(R2 = function(x)
-        format.r(x)) %>%
-      colformat_num(j = "R2", big.mark=",", digits = 3) -> table
+        format.r(x)) -> table
   }
   if("sr2" %in% names(dataframe)) {
     table %>%
@@ -98,8 +96,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
               value = as_paragraph("sr", as_sup("2"))) %>%
       italic(j = "sr2", part = "header") %>%
       set_formatter(sr2 = function(x)
-        format.r(x)) %>%
-      colformat_num(j = "sr2", big.mark=",", digits = 3) -> table
+        format.r(x)) -> table
   }
   if("np2" %in% names(dataframe)) {
     table %>%
