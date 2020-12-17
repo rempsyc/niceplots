@@ -122,5 +122,11 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
          j = ~ Model + B + t + p + np2 + sr2 + signif,
          bg = "#CFCAC2") -> table
   }
+  table %>%
+    colformat_num(j = (select(dataframe, where(is.numeric)) %>%
+                    select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
+                                    ^b$|^M$|^B$|^R2$|^sr2$|^np2$|^dR$",
+                                    ignore.case =F)) %>% names), 
+                  big.mark=",", digits = 2) -> table
   table
 }
