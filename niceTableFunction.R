@@ -122,7 +122,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
            j = table$col_keys) %>%
       bg(i = ~ signif == TRUE,
          j = table$col_keys,
-         bg = "#CFCAC2") -> table
+         bg = "#D9D9D9") -> table
   }
   table %>%
     colformat_num(j = (select(dataframe, where(is.numeric)) %>%
