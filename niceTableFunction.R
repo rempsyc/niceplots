@@ -3,6 +3,10 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if(!require(dplyr)){install.packages("dplyr")}
   library(flextable)
   library(dplyr)
+  if(highlight == TRUE) {
+    dataframe %>%
+      mutate(signif = ifelse(p < .05, TRUE, FALSE)) -> dataframe
+  }
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
   dataframe %>%
     flextable %>%
@@ -79,7 +83,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if("B" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "B", part = "header",
-              value = as_paragraph("β")) %>%
+              value = as_paragraph("�")) %>%
       colformat_num(j = "B", big.mark=",", digits = 2) -> table
   }
   if("R2" %in% names(dataframe)) {
@@ -101,7 +105,7 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if("np2" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "np2", part = "header",
-              value = as_paragraph("η", as_sub("p"), as_sup("2"))) %>%
+              value = as_paragraph("<U+03B7>", as_sub("p"), as_sup("2"))) %>%
       colformat_num(j = "np2", big.mark=",", digits = 2) -> table
   }
   if("dR" %in% names(dataframe)) {
@@ -114,16 +118,16 @@ niceTable <- function (dataframe, italics = NULL, special = FALSE, highlight = F
   if(highlight == TRUE) {
     table %>%
       bold(i = ~ signif == TRUE,
-           j = ~ Model + B + t + p + np2 + sr2 + signif) %>%
+           j = table$col_keys) %>%
       bg(i = ~ signif == TRUE,
-         j = ~ Model + B + t + p + np2 + sr2 + signif,
+         j = table$col_keys,
          bg = "#CFCAC2") -> table
   }
   table %>%
     colformat_num(j = (select(dataframe, where(is.numeric)) %>%
-                    select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
+                         select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
                                     ^b$|^M$|^B$|^R2$|^sr2$|^np2$|^dR$",
-                                    ignore.case =F)) %>% names), 
+                                         ignore.case =F)) %>% names), 
                   big.mark=",", digits = 2) -> table
   table
 }
