@@ -2,8 +2,8 @@ niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),
   if(!require(ggplot2)){install.packages("ggplot2")}
   library(ggplot2)
   has.groups=!missing(group.variable)
-  r = round(cor.test(mtcars[,deparse(substitute(cyl))],mtcars[,deparse(substitute(hp))], use="complete.obs",)$estimate,2)
-  p = round(cor.test(mtcars[,deparse(substitute(cyl))],mtcars[,deparse(substitute(hp))], use="complete.obs",)$p.value,3)
+  r = round(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$estimate,2)
+  p = round(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$p.value,3)
   if (!missing(groups.order)) {group.variable <- factor(group.variable, levels=groups.order)}
   if (!missing(groups.names)) {levels(group.variable) = groups.names}
   if (missing(group.variable)) {
