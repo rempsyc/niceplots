@@ -8,7 +8,6 @@ overlapCircle <- function(response, categories = c("Self", "Other")){
   scale = (c(1,2,3,4,5,6,7))
   overlap = (c(0,10,20,30,55,65,85))
   po <- round(approx(scale, overlap, xout = response)$y, digits=2) # po = Percentage overlap
-  cat("To save to file, enter the following commands (replace PDF with PNG if desired):\nDon't forget to replace 'desired score' with the actual score you want to plot\npdf(file = 'filepath/filename.pdf')\noverlapCircle(desired score)\ndev.off()")
   plot <- VennDiagram::draw.pairwise.venn(area1 = 100,
                                   area2 = 100,
                                   cross.area = po,
