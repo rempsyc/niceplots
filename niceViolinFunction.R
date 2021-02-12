@@ -36,7 +36,7 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
                       ymax = dataSummary[,7]),
                   color = "black", 
                   size = 0.5, 
-                  width = 0, 
+                  width = 0.1, 
                   data = dataSummary) + 
     theme(legend.position = "none", 
           axis.text.x = element_text(colour="black"), 
