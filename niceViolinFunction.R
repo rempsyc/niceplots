@@ -26,7 +26,7 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
     xlab(xtitle) +
-    geom_violin(color = "black") +
+    geom_violin(color = "white", alpha = 0.7) +
     geom_point(aes(y = Mean), 
                color = "black", 
                size = 4, 
@@ -36,7 +36,7 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
                       ymax = dataSummary[,7]),
                   color = "black", 
                   size = 0.5, 
-                  width = 0.2, 
+                  width = 0, 
                   data = dataSummary) + 
     theme(legend.position = "none", 
           axis.text.x = element_text(colour="black"), 
