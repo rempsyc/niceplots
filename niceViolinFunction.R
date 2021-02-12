@@ -1,4 +1,4 @@
-niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels=T,has.xlabels=T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL, CIcap.width=0.1) {
+niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels=T,has.xlabels=T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL, CIcap.width=0.1, obs=F) {
   Data <- data.frame(group, response)
   class(Data$response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion")}
@@ -37,7 +37,7 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
                   color = "black", 
                   size = 1, 
                   width = CIcap.width, 
-                  data = dataSummary) + 
+                  data = dataSummary) +
     theme(legend.position = "none", 
           axis.text.x = element_text(colour="black"), 
           axis.text.y = element_text(colour="black"),
@@ -46,6 +46,10 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
           panel.border=element_blank(),
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black")) +
+    {if (obs == TRUE) geom_point(color = "black",
+                                 alpha = 0.7,
+                                 size = 2,
+                                 data = Data)} +
     {if (has.ylabels == FALSE) theme(axis.text.y=element_blank(),
                                      axis.ticks.y=element_blank())} +
     {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
