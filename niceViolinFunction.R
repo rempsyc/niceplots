@@ -1,4 +1,4 @@
-niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels=T,has.xlabels=T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL) {
+niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels=T,has.xlabels=T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL, CIcap.width=0.1) {
   Data <- data.frame(group, response)
   class(Data$response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion")}
@@ -36,7 +36,7 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
                       ymax = dataSummary[,7]),
                   color = "black", 
                   size = 1, 
-                  width = 0.1, 
+                  width = CIcap.width, 
                   data = dataSummary) + 
     theme(legend.position = "none", 
           axis.text.x = element_text(colour="black"), 
@@ -55,9 +55,9 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
                                       size= 1.3, 
                                       textsize=8)} +
     {if (!missing(signif_annotation)) geom_signif(annotation=signif_annotation, 
-                                             y_position=signif_yposition, 
-                                             xmin=signif_xmin, 
-                                             xmax=signif_xmax,
-                                             size=1.3, 
-                                             textsize=8)}
+                                                  y_position=signif_yposition, 
+                                                  xmin=signif_xmin, 
+                                                  xmax=signif_xmax,
+                                                  size=1.3, 
+                                                  textsize=8)}
 }
