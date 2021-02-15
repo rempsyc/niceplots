@@ -1,4 +1,4 @@
-niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels=T,has.xlabels=T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL, CIcap.width=0.1, obs=F) {
+niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels=T,has.xlabels=T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL, CIcap.width=0.1, obs=F, alpha = .70, border.colour = "white") {
   Data <- data.frame(group, response)
   class(Data$response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion")}
@@ -26,7 +26,7 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
     xlab(xtitle) +
-    geom_violin(color = "white", alpha = 0.7) +
+    geom_violin(color = border.colour, alpha = alpha) +
     geom_point(aes(y = Mean), 
                color = "black", 
                size = 4, 
