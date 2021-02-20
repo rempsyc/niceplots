@@ -1,4 +1,4 @@
-niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NULL,ytitle=waiver(),xtitle=NULL,has.ylabels=T,has.xlabels=T,comp1=1,comp2=2,signif_annotation=NULL,signif_yposition=NULL,signif_xmin=NULL,signif_xmax=NULL, CIcap.width=0.1, obs=F, alpha = .70, border.colour = "white") {
+niceViolin <- function (group, response, boot=TRUE, bootstraps=2000, colours, xlabels=NULL, ytitle=waiver(), xtitle=NULL, has.ylabels=TRUE, has.xlabels=TRUE, comp1=1, comp2=2, signif_annotation=NULL, signif_yposition=NULL, signif_xmin=NULL, signif_xmax=NULL, ymin, ymax, yby=1, CIcap.width=0.1, obs=FALSE, alpha=.70, border.colour="white") {
   Data <- data.frame(group, response)
   class(Data$response) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion")}
@@ -54,6 +54,7 @@ niceViolin <- function (group,response,boot=T,bootstraps=2000,colours,xlabels=NU
                                      axis.ticks.y=element_blank())} +
     {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
                                      axis.ticks.x=element_blank())} +
+    {if (!missing(ymin)) scale_y_continuous(limits=c(ymin, ymax), breaks = seq(ymin, ymax, by = yby))} +
     {if (!missing(comp1)) geom_signif(comparisons = list(c(comp1, comp2)), 
                                       map_signif_level=TRUE, 
                                       size= 1.3, 
