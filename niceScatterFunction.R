@@ -2,8 +2,21 @@ niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),
   if(!require(ggplot2)){install.packages("ggplot2")}
   library(ggplot2)
   has.groups=!missing(group.variable)
-  if (has.r == T) { r = round(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$estimate,2) }
-  if (has.p == T) { p = round(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$p.value,3) }
+  if (has.r == T) { 
+    format.r <- function(r, precision = 0.01) {
+      digits <- -log(precision, base = 10)
+      r <- formatC(r, format = 'f', digits = digits)
+      sub("0", "", r)}
+    r = format.r(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$estimate) 
+    }
+  if (has.p == T) { 
+    format.p <- function(p, precision = 0.001) {
+      digits <- -log(precision, base = 10)
+      p <- formatC(p, format = 'f', digits = digits)
+      p[p == formatC(0, format = 'f', digits = digits)] <- paste0('< ', precision)
+      sub("0", "", p)}
+    p = format.p(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$p.value) 
+    }
   if (!missing(groups.order)) {group.variable <- factor(group.variable, levels=groups.order)}
   if (!missing(groups.names)) {levels(group.variable) = groups.names}
   if (missing(group.variable)) {
@@ -49,7 +62,7 @@ niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),
     {if (has.legend == FALSE) theme(legend.position = "none")} +
     labs(legend.title = legend.title, colour = legend.title, fill = legend.title, linetype = legend.title, shape = legend.title) +
     {if (!missing(manual.slope.alpha)) scale_alpha_manual(values=manual.slope.alpha, guide=FALSE)} +
-    {if (has.r == TRUE) annotate(geom="text", x=r.x, y=r.y, label=paste0("r = ", r), hjust=1, vjust=-3, size=7)} +
-    {if (has.p == TRUE) annotate(geom="text", x=p.x, y=p.y, label=paste0("p = ", p), hjust=1, vjust=-1, size=7)} +
+    {if (has.r == TRUE) annotate(geom="text", x=r.x, y=r.y, label=sprintf("italic('r =')~'%s'", r), parse = TRUE, hjust=1, vjust=-3, size=7)} +
+    {if (has.p == TRUE) annotate(geom="text", x=p.x, y=p.y, label=sprintf("italic('p =')~'%s'", p), parse = TRUE, hjust=1, vjust=-1, size=7)} +
     theme(axis.text.x = element_text(colour="black"), axis.text.y = element_text(colour="black"), panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.border=element_blank(), axis.line=element_line(colour = "black"), axis.ticks=element_line(colour = "black"))
 }
