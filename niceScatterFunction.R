@@ -13,8 +13,12 @@ niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),
     format.p <- function(p, precision = 0.001) {
       digits <- -log(precision, base = 10)
       p <- formatC(p, format = 'f', digits = digits)
-      p[p == formatC(0, format = 'f', digits = digits)] <- paste0('< ', precision)
-      sub("0", "", p)}
+      if (p < .001) {
+        p = paste0('< ', precision)}
+      if (p >= .001) {
+        p = paste0('= ', p)    }
+      sub("0", "", p)
+    }
     p = format.p(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$p.value) 
     }
   if (!missing(groups.order)) {group.variable <- factor(group.variable, levels=groups.order)}
@@ -63,6 +67,6 @@ niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),
     labs(legend.title = legend.title, colour = legend.title, fill = legend.title, linetype = legend.title, shape = legend.title) +
     {if (!missing(manual.slope.alpha)) scale_alpha_manual(values=manual.slope.alpha, guide=FALSE)} +
     {if (has.r == TRUE) annotate(geom="text", x=r.x, y=r.y, label=sprintf("italic('r =')~'%s'", r), parse = TRUE, hjust=1, vjust=-3, size=7)} +
-    {if (has.p == TRUE) annotate(geom="text", x=p.x, y=p.y, label=sprintf("italic('p =')~'%s'", p), parse = TRUE, hjust=1, vjust=-1, size=7)} +
+    {if (has.p == TRUE) annotate(geom="text", x=p.x, y=p.y, label=sprintf("italic('p')~'%s'", p), parse = TRUE, hjust=1, vjust=-1, size=7)} +
     theme(axis.text.x = element_text(colour="black"), axis.text.y = element_text(colour="black"), panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.border=element_blank(), axis.line=element_line(colour = "black"), axis.ticks=element_line(colour = "black"))
 }
