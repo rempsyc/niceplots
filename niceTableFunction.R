@@ -91,16 +91,14 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
   if("R2" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "R2", part = "header",
-              value = as_paragraph("R", as_sup("2"))) %>%
-      italic(j = "R2", part = "header") %>%
+              value = as_paragraph(as_i("R"), as_sup("2"))) %>%
       set_formatter(R2 = function(x)
         format.r(x)) -> table
   }
   if("sr2" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "sr2", part = "header",
-              value = as_paragraph("sr", as_sup("2"))) %>%
-      italic(j = "sr2", part = "header") %>%
+              value = as_paragraph(as_i("sr"), as_sup("2"))) %>%
       set_formatter(sr2 = function(x)
         format.r(x)) -> table
   }
@@ -113,8 +111,7 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
   if("dR" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "dR", part = "header",
-              value = as_paragraph("d", as_sub("R"))) %>%
-      italic(j = "dR", part = "header") %>%
+              value = as_paragraph(as_i("d"), as_sub("R"))) %>%
       colformat_num(j = "dR", big.mark=",", digits = 2) -> table
   }
   if(highlight == TRUE) {
