@@ -3,6 +3,11 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
   if(!require(dplyr)){install.packages("dplyr")}
   library(flextable)
   library(dplyr)
+  if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
+    dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
+    dataframe["95% CI"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1, function(x) paste0("[", x[1], ", ", x[2], "]"))
+    dataframe <- select(dataframe, -c("CI_lower", "CI_upper"))
+  }
   if(highlight == TRUE) {
     dataframe %>%
       mutate(signif = ifelse(p < .05, TRUE, FALSE)) -> dataframe
