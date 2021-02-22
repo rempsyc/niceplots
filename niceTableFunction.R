@@ -65,7 +65,7 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
   if("SD" %in% names(dataframe)) {
     table %>%
       italic(j = "SD", part = "header") %>%
-      colformat_num(j = "SD", big.mark=",", digits = 1) -> table
+      colformat_num(j = "SD", big.mark=",", digits = 2) -> table
   }
   if("F" %in% names(dataframe)) {
     table %>%
@@ -85,7 +85,7 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
   if("M" %in% names(dataframe)) {
     table %>%
       italic(j = "M", part = "header") %>%
-      colformat_num(j = "M", big.mark=",", digits = 1) -> table
+      colformat_num(j = "M", big.mark=",", digits = 2) -> table
   }
   if("B" %in% names(dataframe)) {
     table %>%
