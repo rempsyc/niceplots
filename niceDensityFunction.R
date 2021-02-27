@@ -2,8 +2,9 @@ niceDensity <- function(variable, Group, data, colours) {
   if(!require(dplyr)){install.packages("dplyr")}
   library(dplyr)
   var.name <- names(data)[which(names(data)==variable)]
-  variable = data[,variable]
-  Group = data[,Group]
+  variable <- data[,variable]
+  Group <- data[,Group]
+  Group <- factor(Group)
   x <- seq(min(variable), max(variable), length.out=100)
   norm.1 <- data %>%
     filter(Group==levels(factor(data[,"Group"]))[1]) %>%
