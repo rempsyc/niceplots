@@ -1,4 +1,6 @@
 niceDensity <- function(variable, Group, data, colours) {
+  if(!require(dplyr)){install.packages("dplyr")}
+  library(dplyr)
   var.name <- names(data)[which(names(data)==variable)]
   variable = data[,variable]
   Group = data[,Group]
