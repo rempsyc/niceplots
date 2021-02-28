@@ -1,4 +1,4 @@
-niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle=waiver(), groups.labels=NULL, grid=TRUE, shapiro=FALSE) {
+niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle=variable, groups.labels=NULL, grid=TRUE, shapiro=FALSE) {
   if(!require(dplyr)){install.packages("dplyr")}
   if(!require(ggplot2)){install.packages("ggplot2")}
   if(!require(ggrepel)){install.packages("ggrepel")}
