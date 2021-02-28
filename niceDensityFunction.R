@@ -1,29 +1,46 @@
-niceDensity <- function(variable, Group, data, colours, ytitle="Density", xtitle=waiver(), groups.labels=NULL, grid=TRUE, shapiro.p) {
+niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle=waiver(), groups.labels=NULL, grid=TRUE, shapiro.p) {
   if(!require(dplyr)){install.packages("dplyr")}
   if(!require(ggplot2)){install.packages("ggplot2")}
   library(dplyr)
   library(ggplot2)
   data$variable <- data[,variable]
-  data$Group <- factor(data[,Group])
-  {if (!missing(groups.labels)) levels(data$Group) <- groups.labels}
-  x <- seq(min(data$variable), max(data$variable), length.out=100)
-  y = dnorm(x, mean(data$variable), sd(data$variable))
-  norm.1 <- data %>%
-    filter(data$Group==levels(data$Group)[1]) %>%
-    with(data.frame(x = x, y = y)) %>%
-    mutate(Group = factor(levels(data$Group)[1],levels = levels(data$Group)))
+  data$group <- factor(data[,group])
+  data[,group] <- factor(data[,group])
+  {if (!missing(groups.labels)) levels(data$group) <- groups.labels}
+    norm.1 <- data %>%
+    filter(data$group==levels(data$group)[1]) %>%
+    with(data.frame(x = seq(min(variable), 
+                            max(variable), 
+                            length.out=100), 
+                    y = dnorm(seq(min(variable), 
+                                  max(variable), 
+                                  length.out=100), mean(variable), 
+                              sd(variable)))) %>%
+    mutate(group = factor(levels(data$group)[1],levels = levels(data$group)))
   norm.2 <- data %>%
-    filter(data$Group==levels(data$Group)[2]) %>%
-    with(data.frame(x = x, y = y)) %>%
-    mutate(Group = factor(levels(data$Group)[2],levels = levels(data$Group)))
+    filter(data$group==levels(data$group)[2]) %>%
+    with(data.frame(x = seq(min(variable), 
+                            max(variable), 
+                            length.out=100), 
+                    y = dnorm(seq(min(variable), 
+                                  max(variable), 
+                                  length.out=100), mean(variable), 
+                              sd(variable)))) %>%
+    mutate(group = factor(levels(data$group)[2],levels = levels(data$group)))
   norm.3 <- data %>%
-    filter(data$Group==levels(data$Group)[3]) %>%
-    with(data.frame(x = x, y = y)) %>%
-    mutate(Group = factor(levels(data$Group)[3],levels = levels(data$Group)))
-  ggplot(data, aes(x=variable, fill=Group)) +
+    filter(data$group==levels(data$group)[3]) %>%
+    with(data.frame(x = seq(min(variable), 
+                            max(variable), 
+                            length.out=100), 
+                    y = dnorm(seq(min(variable), 
+                                  max(variable), 
+                                  length.out=100), mean(variable), 
+                              sd(variable)))) %>%
+    mutate(group = factor(levels(data$group)[3],levels = levels(data$group)))
+  ggplot(data, aes(x=variable, fill=group)) +
     geom_density(alpha=0.6, size=1, colour="gray25") +
     theme_bw(base_size = 24) +
-    facet_grid(Group ~ .) +
+    facet_grid(group ~ .) +
     geom_line(data = norm.1, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
     geom_line(data = norm.2, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
     geom_line(data = norm.3, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
