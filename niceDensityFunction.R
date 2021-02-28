@@ -1,6 +1,8 @@
 niceDensity <- function(variable, Group, data, colours) {
   if(!require(dplyr)){install.packages("dplyr")}
+  if(!require(ggplot2)){install.packages("ggplot2")}
   library(dplyr)
+  library(ggplot2)
   var.name <- names(data)[which(names(data)==variable)]
   data$variable <- data[,variable]
   data$Group <- factor(data[,Group])
