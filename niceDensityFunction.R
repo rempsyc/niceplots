@@ -9,17 +9,6 @@ niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle
   data$group <- factor(data[,group])
   data[,group] <- factor(data[,group])
   {if (!missing(groups.labels)) levels(data$group) <- groups.labels}
-  if (shapiro == TRUE) { 
-    format.p <- function(p, precision = 0.001) {
-      digits <- -log(precision, base = 10)
-      p <- formatC(p, format = 'f', digits = digits)
-      if (p < .001) {
-        p = paste0('< ', precision, " (Shapiro-Wilk)")}
-      if (p >= .001) {
-        p = paste0('= ', p, " (Shapiro-Wilk)")    }
-      sub("0", "", p)
-    }
-  }
   # Make data for normally distributed lines
     norm.1 <- data %>%
     filter(data$group==levels(data$group)[1]) %>%
@@ -52,6 +41,16 @@ niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle
                               sd(variable)))) %>%
     mutate(group = factor(levels(data$group)[3],levels = levels(data$group)))
   # Make data for the Shapiro-Wilk tests
+  if (shapiro == TRUE) { 
+    format.p <- function(p, precision = 0.001) {
+      digits <- -log(precision, base = 10)
+      p <- formatC(p, format = 'f', digits = digits)
+      if (p < .001) {
+        p = paste0('< ', precision, " (Shapiro-Wilk)")}
+      if (p >= .001) {
+        p = paste0('= ', p, " (Shapiro-Wilk)")    }
+      sub("0", "", p)
+    }
   data %>%
     filter(data$group==levels(data$group)[1]) %>%
     select(variable) %>%
@@ -74,6 +73,7 @@ niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle
   dat_text <- data.frame(
     group = levels(data$group),
     text = c(shapiro.1, shapiro.2, shapiro.3))
+  }
   # Make plot
   ggplot(data, aes(x=variable, fill=group)) +
     geom_density(alpha=0.6, size=1, colour="gray25") +
