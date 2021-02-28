@@ -3,7 +3,6 @@ niceDensity <- function(variable, Group, data, colours, ytitle="Density", xtitle
   if(!require(ggplot2)){install.packages("ggplot2")}
   library(dplyr)
   library(ggplot2)
-  var.name <- names(data)[which(names(data)==variable)]
   data$variable <- data[,variable]
   data$Group <- factor(data[,Group])
   {if (!missing(groups.labels)) levels(data$Group) <- groups.labels}
@@ -30,7 +29,6 @@ niceDensity <- function(variable, Group, data, colours, ytitle="Density", xtitle
     geom_line(data = norm.3, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
     ylab(ytitle) +
     xlab(xtitle) +
-    xlab(var.name) +
     {if (!missing(colours)) scale_fill_manual(values=colours)} +
     {if (grid == FALSE) theme(panel.grid.major=element_blank(),
                              panel.grid.minor=element_blank())} +
