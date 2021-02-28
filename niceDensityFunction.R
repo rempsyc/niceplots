@@ -1,4 +1,4 @@
-niceDensity <- function(variable, Group, data, colours, ytitle="Density", xtitle=waiver(), groups.labels=NULL, shapiro.p) {
+niceDensity <- function(variable, Group, data, colours, ytitle="Density", xtitle=waiver(), groups.labels=NULL, grid=TRUE, shapiro.p) {
   if(!require(dplyr)){install.packages("dplyr")}
   if(!require(ggplot2)){install.packages("ggplot2")}
   library(dplyr)
@@ -25,18 +25,18 @@ niceDensity <- function(variable, Group, data, colours, ytitle="Density", xtitle
     geom_density(alpha=0.6, size=1, colour="gray25") +
     theme_bw(base_size = 24) +
     facet_grid(Group ~ .) +
-    {if (!missing(colours)) scale_fill_manual(values=colours)} +
     geom_line(data = norm.1, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
     geom_line(data = norm.2, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
     geom_line(data = norm.3, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
     ylab(ytitle) +
     xlab(xtitle) +
     xlab(var.name) +
+    {if (!missing(colours)) scale_fill_manual(values=colours)} +
+    {if (grid == FALSE) theme(panel.grid.major=element_blank(),
+                             panel.grid.minor=element_blank())} +
     theme(legend.position = "none",
           axis.text.x = element_text(colour="black"),
           axis.text.y = element_text(colour="black"),
-          #panel.grid.major=element_blank(),
-          #panel.grid.minor=element_blank(),
           panel.border=element_blank(),
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black"))
