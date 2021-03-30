@@ -24,7 +24,10 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
     fontsize(part = "all", size = 12) %>%
     font(part = "all", fontname = "Times New Roman") %>%
     align(align = "center", part = "all") %>%
-    line_spacing(space = 2, part = "all") %>%
+    #line_spacing(space = 2, part = "all") %>%
+    height(height = 0.55, part = "body") %>%
+    height(height = 0.55, part = "head") %>%
+    hrule(rule = "exact", part = "all") %>%
     set_table_properties(layout = "autofit") -> table
   if(!missing(italics)) {
     table %>%
