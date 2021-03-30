@@ -1,0 +1,23 @@
+# Standardize variables to get standardized coefficients
+mtcars.std <- lapply(mtcars, scale)
+# Create a simple linear model
+model <- lm(mpg ~ cyl + wt * hp, mtcars.std)
+# Gather summary statistics
+stats.table <- as.data.frame(summary(model)$coefficients)
+# Add confidence interval of the regression coefficient
+CI <- confint(model)
+# Add a row for variables names and CI
+stats.table <- cbind(row.names(stats.table), stats.table, CI)
+# Rename the columns appropriately
+names(stats.table) <- c("Term", "B", "SE", "t", "p", "CI_lower", "CI_upper")
+# 
+stats.table
+
+#
+niceTable(stats.table)
+
+table <- flextable(stats.table)
+
+table %>%
+  colformat_double(digits = 2)
+

@@ -55,43 +55,43 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
   if("t" %in% names(dataframe)) {
     table %>%
       italic(j = "t", part = "header") %>%
-      colformat_num(j = "t", big.mark=",", digits = 2) -> table
+      colformat_double(j = "t", big.mark=",", digits = 2) -> table
   }
   if("SE" %in% names(dataframe)) {
     table %>%
       italic(j = "SE", part = "header") %>%
-      colformat_num(j = "SE", big.mark=",", digits = 2) -> table
+      colformat_double(j = "SE", big.mark=",", digits = 2) -> table
   }
   if("SD" %in% names(dataframe)) {
     table %>%
       italic(j = "SD", part = "header") %>%
-      colformat_num(j = "SD", big.mark=",", digits = 2) -> table
+      colformat_double(j = "SD", big.mark=",", digits = 2) -> table
   }
   if("F" %in% names(dataframe)) {
     table %>%
       italic(j = "F", part = "header") %>%
-      colformat_num(j = "F", big.mark=",", digits = 2) -> table
+      colformat_double(j = "F", big.mark=",", digits = 2) -> table
   }
   if("df" %in% names(dataframe)) {
     table %>%
       italic(j = "df", part = "header") %>%
-      colformat_num(j = "df", big.mark=",", digits = 0) -> table
+      colformat_double(j = "df", big.mark=",", digits = 0) -> table
   }
   if("b" %in% names(dataframe)) {
     table %>%
       italic(j = "b", part = "header") %>%
-      colformat_num(j = "b", big.mark=",", digits = 2) -> table
+      colformat_double(j = "b", big.mark=",", digits = 2) -> table
   }
   if("M" %in% names(dataframe)) {
     table %>%
       italic(j = "M", part = "header") %>%
-      colformat_num(j = "M", big.mark=",", digits = 2) -> table
+      colformat_double(j = "M", big.mark=",", digits = 2) -> table
   }
   if("B" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "B", part = "header",
               value = as_paragraph("β")) %>%
-      colformat_num(j = "B", big.mark=",", digits = 2) -> table
+      colformat_double(j = "B", big.mark=",", digits = 2) -> table
   }
   if("R2" %in% names(dataframe)) {
     table %>%
@@ -111,13 +111,13 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
     table %>%
       compose(i = 1, j = "np2", part = "header",
               value = as_paragraph("η", as_sub("p"), as_sup("2"))) %>%
-      colformat_num(j = "np2", big.mark=",", digits = 2) -> table
+      colformat_double(j = "np2", big.mark=",", digits = 2) -> table
   }
   if("dR" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "dR", part = "header",
               value = as_paragraph(as_i("d"), as_sub("R"))) %>%
-      colformat_num(j = "dR", big.mark=",", digits = 2) -> table
+      colformat_double(j = "dR", big.mark=",", digits = 2) -> table
   }
   if(highlight == TRUE) {
     table %>%
@@ -128,7 +128,7 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
          bg = "#D9D9D9") -> table
   }
   table %>%
-    colformat_num(j = (select(dataframe, where(is.numeric)) %>%
+    colformat_double(j = (select(dataframe, where(is.numeric)) %>%
                          select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
                                     ^b$|^M$|^B$|^R2$|^sr2$|^np2$|^dR$",
                                          ignore.case =F)) %>% names), 
