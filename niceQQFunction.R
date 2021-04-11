@@ -38,7 +38,7 @@ niceQQ <- function(variable, group, data, colours, groups.labels=NULL, grid=TRUE
     theme_bw(base_size = 24) +
     {if (shapiro == TRUE) geom_text_repel(data = dat_text,
                                           mapping = aes(x = Inf, 
-                                                        y = Inf, 
+                                                        y = -Inf, 
                                                         label = text),
                                           inherit.aes = FALSE,
                                           size = 6,
