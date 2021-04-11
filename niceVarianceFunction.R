@@ -5,6 +5,7 @@ niceVariance <- function(variable, group, data, colours, groups.labels, grid=TRU
   library(dplyr)
   library(ggplot2)
   library(ggrepel)
+  source("https://raw.githubusercontent.com/RemPsyc/niceplots/master/niceScatterFunction.R")
   data[[group]] <- as.factor(data[[group]])
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
   # Calculate variance
