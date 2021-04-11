@@ -10,8 +10,7 @@ niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle
   gform <- reformulate(".", response=group)
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
   # Make data for normally distributed lines
-  dat_norm <- data %>% group_by(.data[[group]]) %>% 
-    # HERE IS THE CHANGE: do( 
+  dat_norm <- data %>% group_by(.data[[group]]) %>%
     do(summarise(.,x=seq(min(.[[variable]]), 
                          max(.[[variable]]), 
                          length.out=100),
