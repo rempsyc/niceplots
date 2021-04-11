@@ -1,10 +1,11 @@
-niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle=variable, groups.labels=NULL, grid=TRUE, shapiro=FALSE) {
+niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle=variable, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
   if(!require(dplyr)){install.packages("dplyr")}
   if(!require(ggplot2)){install.packages("ggplot2")}
   if(!require(ggrepel)){install.packages("ggrepel")}
   library(dplyr)
   library(ggplot2)
   require(ggrepel)
+  data[[group]] <- as.factor(data[[group]])
   data$variable <- data[,variable]
   data$group <- factor(data[,group])
   data[,group] <- factor(data[,group])
@@ -77,6 +78,7 @@ niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle
   # Make plot
   ggplot(data, aes(x=variable, fill=group)) +
     geom_density(alpha=0.6, size=1, colour="gray25") +
+    ggtitle(title) +
     theme_bw(base_size = 24) +
     facet_grid(group ~ .) +
     geom_line(data = norm.1, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
@@ -95,7 +97,8 @@ niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle
     {if (!missing(colours)) scale_fill_manual(values=colours)} +
     {if (grid == FALSE) theme(panel.grid.major=element_blank(),
                              panel.grid.minor=element_blank())} +
-    theme(legend.position = "none",
+    theme(plot.title = element_text(hjust = 0.5),
+          legend.position = "none",
           axis.text.x = element_text(colour="black"),
           axis.text.y = element_text(colour="black"),
           panel.border=element_blank(),
