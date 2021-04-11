@@ -33,7 +33,7 @@ niceQQ <- function(variable, group, data, colours, groups.labels=NULL, grid=TRUE
     stat_qq_line() +
     stat_qq_point() +
     labs(x = "Theoretical Quantiles", y = "Sample Quantiles") +
-    facet_wrap(gform) +
+    facet_grid(gform) +
     ggtitle(title) +
     theme_bw(base_size = 24) +
     {if (shapiro == TRUE) geom_text_repel(data = dat_text,
