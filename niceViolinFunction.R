@@ -46,10 +46,13 @@ niceViolin <- function (group, response, boot=TRUE, bootstraps=2000, colours, xl
           panel.border=element_blank(),
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black")) +
-    {if (obs == TRUE) geom_point(color = "black",
-                                 alpha = 0.7,
-                                 size = 2,
-                                 data = Data)} +
+    {if (obs == TRUE) geom_dotplot(binaxis = "y", 
+                                   stackdir = "center", 
+                                   position = "dodge",
+                                   color = NA,
+                                   fill = "black",
+                                   alpha = 0.3,
+                                   dotsize = 0.5)} +
     {if (has.ylabels == FALSE) theme(axis.text.y=element_blank(),
                                      axis.ticks.y=element_blank())} +
     {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
