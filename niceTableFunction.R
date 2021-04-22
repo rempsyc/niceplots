@@ -122,6 +122,11 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
               value = as_paragraph(as_i("d"), as_sub("R"))) %>%
       colformat_double(j = "dR", big.mark=",", digits = 2) -> table
   }
+  if("d" %in% names(dataframe)) {
+    table %>%
+      italic(j = "d", part = "header") %>%
+      colformat_double(j = "d", big.mark=",", digits = 2) -> table
+  }
   if(highlight == TRUE) {
     table %>%
       bold(i = ~ signif == TRUE,
