@@ -1,26 +1,32 @@
-niceViolin <- function (group, response, boot=TRUE, bootstraps=2000, colours, xlabels=NULL, ytitle=waiver(), xtitle=NULL, has.ylabels=TRUE, has.xlabels=TRUE, comp1=1, comp2=2, signif_annotation=NULL, signif_yposition=NULL, signif_xmin=NULL, signif_xmax=NULL, ymin, ymax, yby=1, CIcap.width=0.1, obs=FALSE, alpha=.70, border.colour="white") {
-  Data <- data.frame(group, response)
-  class(Data$response) <- "numeric"
+niceViolin <- function (data, group, response, boot=TRUE, bootstraps=2000, 
+                        colours, xlabels=NULL, ytitle=waiver(), xtitle=NULL, 
+                        has.ylabels=TRUE, has.xlabels=TRUE, comp1=1, comp2=2,
+                        signif_annotation=NULL, signif_yposition=NULL, signif_xmin=NULL,
+                        signif_xmax=NULL, ymin, ymax, yby=1, CIcap.width=0.1, obs=FALSE,
+                        alpha=.70, border.colour="white") {
+  data[[group]] <- as.factor(data[[group]])
+  gform <- reformulate(group, response)
+  class(data[[response]]) <- "numeric"
   if(!require(rcompanion)){install.packages("rcompanion")}
   if(!require(ggplot2)){install.packages("ggplot2")}
   if(!require(ggsignif)){install.packages("ggsignif")}
   library(rcompanion)
   library(ggplot2)
   library(ggsignif)
-  dataSummary <- groupwiseMean(response ~ group, 
-                               data   = Data, 
-                               conf   = 0.95, 
+  dataSummary <- groupwiseMean(gform,
+                               data = data,
+                               conf = 0.95,
                                digits = 3,
-                               R      = bootstraps,
-                               boot        = TRUE,
+                               R = bootstraps,
+                               boot = TRUE,
                                traditional = !boot,
-                               normal      = FALSE,
-                               basic       = FALSE,
-                               percentile  = FALSE,
-                               bca         = boot)
-  ggplot(Data, aes(x = factor(group), 
-                   y = response,
-                   fill = factor(group))) + 
+                               normal = FALSE,
+                               basic = FALSE,
+                               percentile = FALSE,
+                               bca = boot)
+  ggplot(data, aes(x = .data[[group]],
+                   y = .data[[response]],
+                   fill = .data[[group]])) + 
     theme_bw(base_size = 24) +
     {if (!missing(colours)) scale_fill_manual(values=colours)} +
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
@@ -57,7 +63,8 @@ niceViolin <- function (group, response, boot=TRUE, bootstraps=2000, colours, xl
                                      axis.ticks.y=element_blank())} +
     {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
                                      axis.ticks.x=element_blank())} +
-    {if (!missing(ymin)) scale_y_continuous(limits=c(ymin, ymax), breaks = seq(ymin, ymax, by = yby))} +
+    {if (!missing(ymin)) scale_y_continuous(limits=c(ymin, ymax),
+                                            breaks = seq(ymin, ymax, by = yby))} +
     {if (!missing(comp1)) geom_signif(comparisons = list(c(comp1, comp2)), 
                                       map_signif_level=TRUE, 
                                       size= 1.3, 
