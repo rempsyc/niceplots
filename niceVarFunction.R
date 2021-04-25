@@ -15,11 +15,11 @@ niceVar <- function(variable, group, data) {
   rownames(var.table) <- NULL
   # Make all relevant variables numeric
   var.table <- var.table %>%
-    mutate(across(-variable, as.numeric))
+    mutate(across(-variable, function(x) round(as.numeric(x),3)))
   # Add the ratio and hetero columns
   var.table %>%
     rowwise() %>%
-    mutate(`Max/Min Ratio` = max(select(., -variable))/min(select(., -variable)),
+    mutate(`Max/Min Ratio` = round(max(select(., -variable))/min(select(., -variable)),1),
            `Heteroscedastic (four times bigger)?` = `Max/Min Ratio` > 4) -> var.table
   # Change names to something meaningful
   for (i in 1:length(levels(data[[group]]))) {
