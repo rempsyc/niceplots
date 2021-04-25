@@ -19,7 +19,7 @@ niceVar <- function(variable, group, data) {
   # Add the ratio and hetero columns
   var.table %>%
     rowwise() %>%
-    mutate(`Max/Min Ratio` = max(c(V1, V2, V3))/min(c(V1, V2, V3)),
+    mutate(`Max/Min Ratio` = max(select(., -variable))/min(select(., -variable)),
            `Heteroscedastic (four times bigger)?` = `Max/Min Ratio` > 4) -> var.table
   # Change names to something meaningful
   for (i in 1:length(levels(data[[group]]))) {
