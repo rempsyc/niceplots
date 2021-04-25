@@ -1,6 +1,8 @@
 niceVar <- function(variable, group, data) {
   if(!require(dplyr)){install.packages("dplyr")}
   library(dplyr)
+  # Make group as factor
+  data[[group]] <- as.factor(data[[group]])
   # Make basic frame
   var.table <- data %>%
     group_by(.data[[group]]) %>%
