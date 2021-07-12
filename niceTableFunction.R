@@ -116,6 +116,12 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
               value = as_paragraph("η", as_sub("p"), as_sup("2"))) %>%
       colformat_double(j = "np2", big.mark=",", digits = 2) -> table
   }
+  if("ges" %in% names(dataframe)) {
+    table %>%
+      compose(i = 1, j = "ges", part = "header",
+              value = as_paragraph("η", as_sub("G"), as_sup("2"))) %>%
+      colformat_double(j = "ges", big.mark=",", digits = 2) -> table
+  }
   if("dR" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "dR", part = "header",
