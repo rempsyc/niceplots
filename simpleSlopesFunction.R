@@ -1,9 +1,8 @@
-if(!require(bootES)){install.packages("bootES")}
-if(!require(lmSupport)){install.packages("lmSupport")}
-library(bootES)
-library(lmSupport)
-
 simpleSlopes <- function(outcome, pred, modx, data) {
+  if(!require(bootES)){install.packages("bootES")}
+  if(!require(lmSupport)){install.packages("lmSupport")}
+  library(bootES)
+  library(lmSupport)
   df <- data
   formula <- paste(outcome, "~", pred, "*", modx)
   mod <- lm(formula, data=df, na.action="na.exclude")
@@ -19,6 +18,10 @@ simpleSlopes <- function(outcome, pred, modx, data) {
 }
 
 simpleSlopes_lows <- function(outcome, pred, modx, data) {
+  if(!require(bootES)){install.packages("bootES")}
+  if(!require(lmSupport)){install.packages("lmSupport")}
+  library(bootES)
+  library(lmSupport)
   df <- data
   df$lows <- unlist(df[,modx]+sd(unlist(df[,modx])))
   formula <- paste(outcome, "~", pred, "* lows")
@@ -35,6 +38,10 @@ simpleSlopes_lows <- function(outcome, pred, modx, data) {
 }
 
 simpleSlopes_highs <- function(outcome, pred, modx, data) {
+  if(!require(bootES)){install.packages("bootES")}
+  if(!require(lmSupport)){install.packages("lmSupport")}
+  library(bootES)
+  library(lmSupport)
   df <- data
   df$lows <- unlist(df[,modx]-sd(unlist(df[,modx])))
   formula <- paste(outcome, "~", pred, "* lows")
