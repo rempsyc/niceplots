@@ -45,8 +45,8 @@ simpleSlopes_highs <- function(outcome, pred, modx, data) {
   library(bootES)
   library(lmSupport)
   df <- data
-  df$lows <- unlist(df[,modx]-sd(unlist(df[,modx])))
-  formula <- paste(outcome, "~", pred, "* lows")
+  df$highs <- unlist(df[,modx]-sd(unlist(df[,modx])))
+  formula <- paste(outcome, "~", pred, "* highs")
   mod <- lm(formula, data=df, na.action="na.exclude")
   models.list <- list(mod)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
