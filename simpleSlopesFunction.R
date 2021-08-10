@@ -34,10 +34,10 @@ simpleSlopes <- function(response, predictor, moderator, data) {
   ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
   stats.list <- mapply(cbind,sums.list,ES.list,SIMPLIFY=FALSE)
   stats.list <- lapply(stats.list, function(x) x[predictor,])
-  table.stats <- do.call(rbind.data.frame, stats.list)
+  table.stats1 <- do.call(rbind.data.frame, stats.list)
   predictor.names <- paste0(predictor, " (LOW-", moderator, ")")
-  table.stats <- cbind(response, predictor.names, table.stats)
-  names(table.stats) <- c("Dependent Variable", "Predictor (+/-1 SD)", "b", "t", "p", "sr2")
+  table.stats1 <- cbind(response, predictor.names, table.stats1)
+  names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)", "b", "t", "p", "sr2")
   
   # Calculate simple slopes for HIGHS
   df$highs <- unlist(df[,moderator]-sd(unlist(df[,moderator])))
@@ -53,7 +53,7 @@ simpleSlopes <- function(response, predictor, moderator, data) {
   names(table.stats2) <- c("Dependent Variable", "Predictor (+/-1 SD)", "b", "t", "p", "sr2")
   
   # Combine both dataframes for both LOWS and HIGHS
-  new.df <- rbind(table.stats,table.stats2)
-  new.df <- new.df[order(new.df$`Dependent Variable`),]
-  new.df
+  table.stats <- rbind(table.stats1,table.stats2)
+  table.stats <- table.stats[order(table.stats$`Dependent Variable`),]
+  table.stats
 }
