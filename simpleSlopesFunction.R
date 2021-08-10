@@ -13,6 +13,7 @@ simpleSlopes <- function(outcomes, predictor, moderator, data) {
   outcomes.names <- rep(outcomes, each=3)
   predictor.names <- row.names(table.stats)
   row.names(table.stats) <- NULL
+  predictor.names <- gsub(".*\\.", "", predictor.names)
   table.stats <- cbind(outcomes.names, predictor.names, table.stats)
   names(table.stats) <- c("Dependent Variable", "Predictor", "b", "t", "p", "sr2")
   table.stats
