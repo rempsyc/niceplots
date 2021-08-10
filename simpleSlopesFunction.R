@@ -32,9 +32,9 @@ simpleSlopes_lows <- function(outcomes, predictor, moderator, data) {
   stats.list <- mapply(cbind,sums.list,ES.list,SIMPLIFY=FALSE)
   stats.list <- lapply(stats.list, function(x) x[predictor,])
   table.stats <- do.call(rbind.data.frame, stats.list)
-  predictor.names <- paste0(predictor, " (Lows-", moderator, ")")
+  predictor.names <- paste0(predictor, " (Low-", moderator, ")")
   table.stats <- cbind(outcomes, predictor.names, table.stats)
-  names(table.stats) <- c("Dependent Variable", "Predictor (—1 SD)", "b", "t", "p", "sr2")
+  names(table.stats) <- c("Dependent Variable", "Predictor (-1 SD)", "b", "t", "p", "sr2")
   table.stats
 }
 
