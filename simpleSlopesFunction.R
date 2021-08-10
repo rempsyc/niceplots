@@ -14,6 +14,7 @@ simpleSlopes <- function(outcome, pred, modx, data) {
   predictor.names <- row.names(table.stats)
   table.stats <- cbind(predictor.names, table.stats)
   names(table.stats) <- c("Predictor", "b", "t", "p", "sr2")
+  row.names(table.stats) <- NULL
   table.stats
 }
 
@@ -34,6 +35,7 @@ simpleSlopes_lows <- function(outcome, pred, modx, data) {
   predictor.names <- row.names(table.stats)
   table.stats <- cbind(predictor.names, table.stats)
   names(table.stats) <- c("Predictor", "b", "t", "p", "sr2")
+  row.names(table.stats) <- NULL
   table.stats
 }
 
@@ -54,5 +56,6 @@ simpleSlopes_highs <- function(outcome, pred, modx, data) {
   predictor.names <- row.names(table.stats)
   table.stats <- cbind(predictor.names, table.stats)
   names(table.stats) <- c("Predictor", "b", "t", "p", "sr2")
+  row.names(table.stats) <- NULL
   table.stats
 }
