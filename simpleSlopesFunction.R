@@ -1,3 +1,8 @@
+if(!require(bootES)){install.packages("bootES")}
+if(!require(lmSupport)){install.packages("lmSupport")}
+library(bootES)
+library(lmSupport)
+
 simpleSlopes <- function(outcome, pred, modx, data) {
   df <- data
   formula <- paste(outcome, "~", pred, "*", modx)
