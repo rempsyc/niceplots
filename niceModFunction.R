@@ -63,6 +63,7 @@ simpleSlopes <- function(response, predictor, moderator, covariates=NULL, data) 
   
   # Combine both dataframes for both LOWS and HIGHS
   table.stats <- rbind(table.stats1,table.stats2)
-  table.stats <- table.stats[order(table.stats$`Dependent Variable`),]
+  correct.order <- c(aperm(array(1:nrow(table.stats), c(1,nrow(table.stats)/2,2)),c(1,3,2)))
+  table.stats <- table.stats[correct.order,]
   table.stats
 }
