@@ -3,12 +3,11 @@ niceMod <- function(response, predictor, moderator, covariates=NULL, data) {
   if(!require(lmSupport)){install.packages("lmSupport")}
   library(bootES)
   library(lmSupport)
-  df <- data
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ") 
   } else {covariates.term <- ""}
   formulas <- paste(response, "~", predictor, "*", moderator, covariates.term)
-  models.list <- sapply(formulas, lm, data = df, simplify = FALSE, USE.NAMES = TRUE)
+  models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
@@ -28,15 +27,14 @@ simpleSlopes <- function(response, predictor, moderator, covariates=NULL, data) 
   if(!require(lmSupport)){install.packages("lmSupport")}
   library(bootES)
   library(lmSupport)
-  df <- data
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ") 
   } else {covariates.term <- ""}
 
   # Calculate simple slopes for LOWS
-  df$lows <- unlist(df[,moderator]+sd(unlist(df[,moderator])))
+  data$lows <- unlist(data[,moderator]+sd(unlist(data[,moderator])))
   formulas <- paste(response, "~", predictor, "* lows", covariates.term)
-  models.list <- sapply(formulas, lm, data = df, simplify = FALSE, USE.NAMES = TRUE)
+  models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
@@ -48,9 +46,9 @@ simpleSlopes <- function(response, predictor, moderator, covariates=NULL, data) 
   names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)", "df", "b", "t", "p", "sr2")
   
   # Calculate simple slopes for HIGHS
-  df$highs <- unlist(df[,moderator]-sd(unlist(df[,moderator])))
+  data$highs <- unlist(data[,moderator]-sd(unlist(data[,moderator])))
   formulas <- paste(response, "~", predictor, "* highs", covariates.term)
-  models.list <- sapply(formulas, lm, data = df, simplify = FALSE, USE.NAMES = TRUE)
+  models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
