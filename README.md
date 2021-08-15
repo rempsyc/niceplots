@@ -1,5 +1,5 @@
 # niceplots
-Convenience functions to make easily customizable plots (via ggplot2), nice APA tables exportable to Word, testing statistical assumptions, and various other tasks.
+Convenience functions to make easily customizable plots (via ggplot2), nice APA tables exportable to Word, test statistical assumptions, and complete various other tasks.
 
 See tutorials here:
 
