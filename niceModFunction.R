@@ -1,7 +1,5 @@
 niceMod <- function(response, predictor, moderator, covariates=NULL, data) {
-  if(!require(bootES)){install.packages("bootES")}
   if(!require(lmSupport)){install.packages("lmSupport")}
-  library(bootES)
   library(lmSupport)
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ") 
@@ -23,9 +21,7 @@ niceMod <- function(response, predictor, moderator, covariates=NULL, data) {
 }
 
 simpleSlopes <- function(response, predictor, moderator, covariates=NULL, data) {
-  if(!require(bootES)){install.packages("bootES")}
   if(!require(lmSupport)){install.packages("lmSupport")}
-  library(bootES)
   library(lmSupport)
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ") 
