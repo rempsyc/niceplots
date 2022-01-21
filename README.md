@@ -13,4 +13,4 @@ https://remi-theriault.com/blog_circles.html
 
 https://remi-theriault.com/blog_table.html
 
-https://remi-theriault.com/blog_ass
+https://remi-theriault.com/blog_assumptions
