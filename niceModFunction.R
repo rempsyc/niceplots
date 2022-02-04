@@ -1,10 +1,13 @@
-niceMod <- function(response, predictor, moderator, covariates=NULL, data) {
+niceMod <- function(response, predictor, moderator, moderator2=NULL, covariates=NULL, data) {
   if(!require(lmSupport)){install.packages("lmSupport")}
   library(lmSupport)
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ") 
   } else {covariates.term <- ""}
-  formulas <- paste(response, "~", predictor, "*", moderator, covariates.term)
+  if(!missing(moderator2)) {
+    moderator2.term <- paste("*", moderator2, collapse = " ") 
+  } else {moderator2 <- ""}
+  formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
   models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
