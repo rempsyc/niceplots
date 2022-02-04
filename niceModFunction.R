@@ -1,4 +1,4 @@
-niceMod <- function(response, predictor, moderator, moderator2=NULL, covariates=NULL, data) {
+niceMod <- function(response, predictor, moderator, moderator2=NULL, covariates=NULL, data, ...) {
   if(!require(lmSupport)){install.packages("lmSupport")}
   library(lmSupport)
   if(!missing(covariates)) {
@@ -8,7 +8,7 @@ niceMod <- function(response, predictor, moderator, moderator2=NULL, covariates=
     moderator2.term <- paste("*", moderator2, collapse = " ") 
   } else {moderator2.term <- ""}
   formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
-  models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
+  models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
