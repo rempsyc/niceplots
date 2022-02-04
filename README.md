@@ -14,3 +14,5 @@ https://remi-theriault.com/blog_circles.html
 https://remi-theriault.com/blog_table.html
 
 https://remi-theriault.com/blog_assumptions
+
+https://remi-theriault.com/blog_t-test
