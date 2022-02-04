@@ -6,7 +6,7 @@ niceMod <- function(response, predictor, moderator, moderator2=NULL, covariates=
   } else {covariates.term <- ""}
   if(!missing(moderator2)) {
     moderator2.term <- paste("*", moderator2, collapse = " ") 
-  } else {moderator2 <- ""}
+  } else {moderator2.term <- ""}
   formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
   models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
