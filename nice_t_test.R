@@ -1,9 +1,10 @@
-nice_t_test <- function(response, group, data) {
+nice_t_test <- function(response, group, data, ...) {
   if(!require(effsize)){install.packages("effsize")}
   library(effsize)
+  data[[group]] <- as.factor(data[[group]])
   formulas <- paste0(response, " ~ ", group)
   formulas <- sapply(formulas, as.formula)
-  mod.list <- sapply(formulas, t.test, data = data, simplify = FALSE, USE.NAMES = TRUE)
+  mod.list <- sapply(formulas, t.test, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
   list.names <- c("statistic", "parameter", "p.value")
   sums.list <- lapply(mod.list, function(x) {(x)[list.names]})
   sapply(formulas, function (x) {
