@@ -37,7 +37,7 @@ simpleSlopes <- function(response, predictor, moderator, moderator2=NULL, covari
   # Calculate simple slopes for LOWS
   data$lows <- unlist(data[,moderator]+sd(unlist(data[,moderator])))
   formulas <- paste(response, "~", predictor, "* lows", moderator2.term, covariates.term)
-  models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
+  models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
@@ -50,7 +50,7 @@ simpleSlopes <- function(response, predictor, moderator, moderator2=NULL, covari
   
   # Calculate simple slopes for mean-level
   formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
-  models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
+  models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
@@ -64,7 +64,7 @@ simpleSlopes <- function(response, predictor, moderator, moderator2=NULL, covari
   # Calculate simple slopes for HIGHS
   data$highs <- unlist(data[,moderator]-sd(unlist(data[,moderator])))
   formulas <- paste(response, "~", predictor, "* highs", moderator2.term, covariates.term)
-  models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
+  models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
@@ -96,7 +96,7 @@ simpleSlopes <- function(response, predictor, moderator, moderator2=NULL, covari
     # Calculate simple slopes for LOWS
     data$lows <- unlist(data[,moderator]+sd(unlist(data[,moderator])))
     formulas <- paste(response, "~", predictor, "* lows", moderator2.term, covariates.term)
-    models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
+    models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
@@ -109,7 +109,7 @@ simpleSlopes <- function(response, predictor, moderator, moderator2=NULL, covari
     
     # Calculate simple slopes for mean-level
     formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
-    models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
+    models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
@@ -123,7 +123,7 @@ simpleSlopes <- function(response, predictor, moderator, moderator2=NULL, covari
     # Calculate simple slopes for HIGHS
     data$highs <- unlist(data[,moderator]-sd(unlist(data[,moderator])))
     formulas <- paste(response, "~", predictor, "* highs", moderator2.term, covariates.term)
-    models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
+    models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
