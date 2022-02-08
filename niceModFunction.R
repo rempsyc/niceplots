@@ -23,7 +23,7 @@ niceMod <- function(response, predictor, moderator, moderator2=NULL, covariates=
   table.stats
 }
 
-simpleSlopes <- function(response, predictor, moderator, moderator2, covariates=NULL, data, ...) {
+simpleSlopes <- function(response, predictor, moderator, moderator2=NULL, covariates=NULL, data, ...) {
   
   if(!require(lmSupport)){install.packages("lmSupport")}
   library(lmSupport)
@@ -31,12 +31,13 @@ simpleSlopes <- function(response, predictor, moderator, moderator2, covariates=
     covariates.term <- paste("+", covariates, collapse = " ") 
   } else {covariates.term <- ""}
   if(!missing(moderator2)) {
-    moderator2.term <- paste("*", moderator2, collapse = " ") 
-  } else {moderator2 <- ""}
+    cat("Note that this is for moderator2 == 0. Reverse code the condition for moderator2 == 1. \n \n")
+    moderator2.term <- paste("*", moderator2, collapse = " ")
+  } else {moderator2.term <- ""}
   
   # Calculate simple slopes for LOWS
   data$lows <- unlist(data[,moderator]+sd(unlist(data[,moderator])))
-  formulas <- paste(response, "~", predictor, "* lows", covariates.term)
+  formulas <- paste(response, "~", predictor, "* lows", moderator2.term, covariates.term)
   models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
@@ -49,7 +50,7 @@ simpleSlopes <- function(response, predictor, moderator, moderator2, covariates=
   names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)", "df", "b", "t", "p", "sr2")
   
   # Calculate simple slopes for mean-level
-  formulas <- paste(response, "~", predictor, "*", moderator, covariates.term)
+  formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
   models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
@@ -63,7 +64,7 @@ simpleSlopes <- function(response, predictor, moderator, moderator2, covariates=
   
   # Calculate simple slopes for HIGHS
   data$highs <- unlist(data[,moderator]-sd(unlist(data[,moderator])))
-  formulas <- paste(response, "~", predictor, "* highs", covariates.term)
+  formulas <- paste(response, "~", predictor, "* highs", moderator2.term, covariates.term)
   models.list <- sapply(formulas, lm, data = data, simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
