@@ -1,4 +1,4 @@
-niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
+niceTable <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL, col.format.r, format.custom, col.format.custom) {
   if(!require(flextable)){install.packages("flextable")}
   if(!require(dplyr)){install.packages("dplyr")}
   library(flextable)
@@ -147,5 +147,17 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE) {
                                     ^b$|^M$|^B$|^R2$|^sr2$|^np2$|^dR$",
                                          ignore.case =F)) %>% names), 
                   big.mark=",", digits = 2) -> table
+  if(!missing(col.format.p)) {
+    rExpression = paste0("table <- table %>% set_formatter(table,`", table$col_keys[col.format.p], "` = ", "format.p", ")")
+    eval(parse(text = rExpression))
+  }
+  if(!missing(col.format.r)) {
+    rExpression = paste0("table <- table %>% set_formatter(table,`", table$col_keys[col.format.r], "` = ", "format.r", ")")
+    eval(parse(text = rExpression))
+  }
+  if(!missing(format.custom) & !missing(col.format.custom)) {
+    rExpression = paste0("table <- table %>% set_formatter(table,`", table$col_keys[col.format.custom], "` = ", format.custom, ")")
+    eval(parse(text = rExpression))
+  }
   table
 }
