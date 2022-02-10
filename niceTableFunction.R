@@ -1,8 +1,6 @@
 niceTable <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL,
                        col.format.r, format.custom, col.format.custom) {
-  if(!exists(deparse(substitute(dataframe)), envir = parent.frame())) {
-    stop("Please provide an existing dataframe.")
-    }
+  dataframe
   if(!require(flextable)){install.packages("flextable")}
   if(!require(dplyr)){install.packages("dplyr")}
   library(flextable)
