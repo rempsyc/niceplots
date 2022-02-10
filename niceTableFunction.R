@@ -1,4 +1,5 @@
-niceTable <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL, col.format.r, format.custom, col.format.custom) {
+niceTable <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL,
+                       col.format.r, format.custom, col.format.custom) {
   if(!require(flextable)){install.packages("flextable")}
   if(!require(dplyr)){install.packages("dplyr")}
   library(flextable)
@@ -12,9 +13,13 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE, col.format.
     dataframe %>%
       mutate(signif = ifelse(p < .05, TRUE, FALSE)) -> dataframe
   }
+  if(is.numeric(highlight)) {
+    dataframe %>%
+      mutate(signif = ifelse(p < highlight, TRUE, FALSE)) -> dataframe
+  }
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
   dataframe %>%
-    {if(highlight == TRUE) flextable(., col_keys = names(dataframe)[-length(dataframe)]) 
+    {if(highlight == TRUE | is.numeric(highlight)) flextable(., col_keys = names(dataframe)[-length(dataframe)]) 
       else flextable(.)} %>%
     theme_booktabs %>%
     hline_top(part="head", border = nice.borders) %>%
@@ -133,7 +138,7 @@ niceTable <- function (dataframe, italics = NULL, highlight = FALSE, col.format.
       italic(j = "d", part = "header") %>%
       colformat_double(j = "d", big.mark=",", digits = 2) -> table
   }
-  if(highlight == TRUE) {
+  if(!missing(highlight)) {
     table %>%
       bold(i = ~ signif == TRUE,
            j = table$col_keys) %>%
