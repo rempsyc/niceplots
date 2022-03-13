@@ -1,4 +1,4 @@
-# Important: Functions migrated to rempsyc package
+# !!! Important: Functions migrated to rempsyc package !!!
 This bundle of "nice" functions is now deprecated. All functions have migrated to the rempsyc package. They have been improved and the syntax was changed from a dot capital to underscore (e.g., old = "niceViolin", new = "nice_violin"). Please install and use the new package here: https://github.com/rempsyc/rempsyc/.
 
 # niceplots [deprecated]
