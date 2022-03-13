@@ -1,4 +1,5 @@
 randomize <- function (design="between",Ncondition=3,n=9,condition.names=c("a","b","c"),col.names=c("id", "Condition")) {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   Condition <- data.frame() # to precreate dataframe  
   if(!require(plyr)){install.packages("plyr")}
   library(plyr)

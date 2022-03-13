@@ -1,4 +1,5 @@
 niceDensity <- function(variable, group, data, colours, ytitle="Density", xtitle=variable, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   if(!require(dplyr)){install.packages("dplyr")}
   if(!require(ggplot2)){install.packages("ggplot2")}
   if(!require(ggrepel)){install.packages("ggrepel")}

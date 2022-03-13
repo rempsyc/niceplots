@@ -1,4 +1,5 @@
 niceVar <- function(variable, group, data) {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   if(!require(dplyr)){install.packages("dplyr")}
   library(dplyr)
   # Make group as factor

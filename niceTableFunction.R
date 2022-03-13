@@ -1,5 +1,6 @@
 niceTable <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL,
                        col.format.r, format.custom, col.format.custom) {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   dataframe
   if(!require(flextable)){install.packages("flextable")}
   if(!require(dplyr)){install.packages("dplyr")}

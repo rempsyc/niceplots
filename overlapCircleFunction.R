@@ -1,4 +1,5 @@
 overlapCircle <- function(response, categories = c("Self", "Other")){
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   if(response < 1 | response > 7) {stop('Overlap score must be between 1 and 7! (scoring system of the Inclusion of the Other in the Self Scale...)')}
   if(!require(VennDiagram)) {install.packages("VennDiagram")}
   if(!require(ggplot2)) {install.packages("ggplot2")}

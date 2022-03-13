@@ -1,4 +1,5 @@
 niceAssumptions <- function(model, interpretation = TRUE) {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   if(!require(lmtest)){install.packages("lmtest")}
   if(!require(crayon)){install.packages("crayon")}
   library(lmtest)

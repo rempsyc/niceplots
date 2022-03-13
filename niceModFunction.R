@@ -1,4 +1,5 @@
 niceMod <- function(response, predictor, moderator, moderator2=NULL, covariates=NULL, data, ...) {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   if(!require(lmSupport)){install.packages("lmSupport")}
   library(lmSupport)
   if(!missing(covariates)) {

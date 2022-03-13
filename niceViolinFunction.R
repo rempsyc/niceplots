@@ -4,6 +4,7 @@ niceViolin <- function (data, group, response, boot=TRUE, bootstraps=2000,
                         signif_annotation=NULL, signif_yposition=NULL, signif_xmin=NULL,
                         signif_xmax=NULL, ymin, ymax, yby=1, CIcap.width=0.1, obs=FALSE,
                         alpha=.70, border.colour="white") {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(group, response)
   class(data[[response]]) <- "numeric"

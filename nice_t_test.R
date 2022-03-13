@@ -1,4 +1,5 @@
 nice_t_test <- function(response, group, data, ...) {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   if(!require(effsize)){install.packages("effsize")}
   library(effsize)
   data[[group]] <- as.factor(data[[group]])

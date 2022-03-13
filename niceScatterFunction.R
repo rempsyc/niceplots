@@ -1,4 +1,5 @@
 niceScatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),has.points=T,has.jitter=F,alpha=0.7,has.confband=F,has.fullrange=F,has.linetype=F,has.shape=F,xmin,xmax,xby=1,ymin,ymax,yby=1,has.legend=F,legend.title="",group.variable=NULL,colours="#619CFF",groups.order=NULL,groups.names=NULL,manual.slope.alpha=NULL,has.r=FALSE, r.x = Inf, r.y = -Inf, has.p=FALSE, p.x = Inf, p.y = -Inf) {
+  cat("Important: This function is now deprecated. A better version has migrated to the rempsyc package. \n Please install and use the rempsyc package here: https://github.com/rempsyc/rempsyc/ \n")
   if(!require(ggplot2)){install.packages("ggplot2")}
   library(ggplot2)
   has.groups=!missing(group.variable)
