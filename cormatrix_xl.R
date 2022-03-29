@@ -1,4 +1,4 @@
-nice_cormatrix <- function(data, filename = "mycormatrix", overwrite = TRUE) {
+cormatrix_xl <- function(data, filename = "mycormatrix", overwrite = TRUE) {
   if(!require(openxlsx)){install.packages("openxlsx")}
   library(openxlsx)
   
