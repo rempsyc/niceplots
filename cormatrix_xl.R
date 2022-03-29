@@ -67,7 +67,7 @@ cormatrix_xl <- function(data, filename = "mycormatrix", overwrite = TRUE) {
   freezePane(wb, "Sheet 1", firstCol = TRUE, firstRow = TRUE)
   
   saveWorkbook(wb, 
-               file = paste(filename, ".xlsx"),
+               file = paste0(filename, ".xlsx"),
                overwrite = overwrite)
   cat(paste0("\n [Correlation matrix '", filename, ".xlsx' has been saved to working directory.]"))
 }
