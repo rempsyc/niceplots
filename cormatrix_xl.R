@@ -5,13 +5,13 @@ cormatrix_xl <- function(data, filename = "mycormatrix", overwrite = TRUE) {
   my.cox.matrix <- cor(data, use = "na.or.complete")
   my.cox.matrix <- as.data.frame(my.cox.matrix)
   
-  print(my.cox.matrix)
+  print(round(my.cox.matrix,2))
   
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
   writeData(wb, sheet = 1, my.cox.matrix, rowNames = TRUE)
   
-  my.style <- createStyle(numFmt = "0.0")
+  my.style <- createStyle(numFmt = "0.00")
   addStyle(wb, 
            sheet = 1, 
            style = my.style, 
